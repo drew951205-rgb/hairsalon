@@ -280,7 +280,7 @@ const AppShell = () => {
         path={location.pathname}
       />
 
-      <header className="site-header py-3 shadow-sm bg-white sticky-top">
+      <header className="site-header py-3 shadow-sm bg-white">
         <div className="container site-header-row">
           <Link
             to="/"
