@@ -225,9 +225,10 @@ const AppShell = () => {
   const [isSiteLoadingLeaving, setIsSiteLoadingLeaving] = useState(false);
   const location = useLocation();
   const isBookingPage = location.pathname === "/booking";
-  const seo = location.pathname.startsWith("/news/")
+  const seoPath = location.pathname === "/about" ? "/stylists" : location.pathname;
+  const seo = seoPath.startsWith("/news/")
     ? seoByPath["/news-detail"]
-    : seoByPath[location.pathname] || seoByPath["/"];
+    : seoByPath[seoPath] || seoByPath["/"];
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -342,6 +343,7 @@ const AppShell = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/stylists" element={<Stylists />} />
+            <Route path="/about" element={<Stylists />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
