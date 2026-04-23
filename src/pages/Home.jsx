@@ -11,53 +11,73 @@ import {
 import { formatNewsDate, getNewsPath } from "../lib/news";
 import Icon from "../components/Icon";
 
-const mapNewsItem = (item) => ({
-  id: item._id,
-  slug: item.slug,
-  date: formatNewsDate(item.publishedAt),
-  title: item.title,
-  summary: item.summary,
-  image: getSanityImageUrl(item.imageRef, {
-    width: 720,
-    quality: 78,
-    fit: "max",
-  }),
-  imageSrcSet: getSanityImageSrcSet(item.imageRef, [360, 540, 720, 960], {
-    quality: 78,
-    fit: "max",
-  }),
-  imageAlt:
-    item.imageAlt ||
-    `VOV Hair Salon ?儔撣?擃格??唳???- ${item.title}嚗?{item.summary}`,
-});
+const isValidItem = (item) => Boolean(item && typeof item === "object");
 
-const mapPortfolioItem = (item) => ({
-  id: item._id,
-  title: item.title,
-  category: item.category,
-  subtitle: item.subtitle,
-  stylist: item.stylist,
-  image: getSanityImageUrl(item.imageRef, {
-    width: 720,
-    quality: 78,
-    fit: "max",
-  }),
-  imageSrcSet: getSanityImageSrcSet(item.imageRef, [360, 540, 720, 960], {
-    quality: 78,
-    fit: "max",
-  }),
-  imageAlt:
-    item.imageAlt ||
-    `VOV Hair Salon ?儔撣?擃桐???- ${item.category}嚗?{item.title}嚗?{item.subtitle}`,
-});
+const mapNewsItem = (item) => {
+  if (!isValidItem(item) || !item._id) {
+    return null;
+  }
 
-const mapTestimonialItem = (item) => ({
-  id: item._id,
-  name: item.name || "憿批恥",
-  comment: item.comment,
-  rating: Math.min(Math.max(Number(item.rating) || 5, 1), 5),
-  source: item.source || "摰Ｘ閰",
-});
+  return {
+    id: item._id,
+    slug: item.slug,
+    date: formatNewsDate(item.publishedAt),
+    title: item.title || "最新消息",
+    summary: item.summary || "",
+    image: getSanityImageUrl(item.imageRef, {
+      width: 720,
+      quality: 78,
+      fit: "max",
+    }),
+    imageSrcSet: getSanityImageSrcSet(item.imageRef, [360, 540, 720, 960], {
+      quality: 78,
+      fit: "max",
+    }),
+    imageAlt:
+      item.imageAlt ||
+      `VOV Hair Salon ?儔撣?擃格??唳???- ${item.title || "最新消息"}`,
+  };
+};
+
+const mapPortfolioItem = (item) => {
+  if (!isValidItem(item) || !item._id) {
+    return null;
+  }
+
+  return {
+    id: item._id,
+    title: item.title || "作品",
+    category: item.category || "作品精選",
+    subtitle: item.subtitle || "",
+    stylist: item.stylist || "",
+    image: getSanityImageUrl(item.imageRef, {
+      width: 720,
+      quality: 78,
+      fit: "max",
+    }),
+    imageSrcSet: getSanityImageSrcSet(item.imageRef, [360, 540, 720, 960], {
+      quality: 78,
+      fit: "max",
+    }),
+    imageAlt:
+      item.imageAlt ||
+      `VOV Hair Salon ?儔撣?擃桐???- ${item.title || "作品"}`,
+  };
+};
+
+const mapTestimonialItem = (item) => {
+  if (!isValidItem(item) || !item._id) {
+    return null;
+  }
+
+  return {
+    id: item._id,
+    name: item.name || "憿批恥",
+    comment: item.comment || "",
+    rating: Math.min(Math.max(Number(item.rating) || 5, 1), 5),
+    source: item.source || "摰Ｘ閰",
+  };
+};
 
 const serviceIcons = [
   {
@@ -104,11 +124,6 @@ const renderServiceIcon = (index) => {
     </div>
   );
 };
-
-const getServicePortfolioPath = (service) =>
-  service.portfolioCategory
-    ? `/portfolio?category=${encodeURIComponent(service.portfolioCategory)}`
-    : "";
 
 const serviceIntroPaths = [
   "/chiayi-haircut",
@@ -162,7 +177,7 @@ const renderTestimonialCard = (testimonial, index) => (
           {"★".repeat(testimonial.rating)}
           {"☆".repeat(5 - testimonial.rating)}
         </p>
-        <p className="mb-3 fst-italic">"{testimonial.comment}"</p>
+        <p className="mb-3 fst-italic">&ldquo;{testimonial.comment}&rdquo;</p>
         <p className="mb-1 fw-bold">- {testimonial.name}</p>
         <p className="mb-0 text-muted">{testimonial.source}</p>
       </div>
@@ -172,6 +187,7 @@ const renderTestimonialCard = (testimonial, index) => (
 
 const Home = () => {
   const [isHomeContentLoading, setIsHomeContentLoading] = useState(true);
+  const [homeContentError, setHomeContentError] = useState("");
   const [featuredNews, setFeaturedNews] = useState([]);
   const [featuredPortfolio, setFeaturedPortfolio] = useState([]);
   const [activeNewsIndex, setActiveNewsIndex] = useState(0);
@@ -191,32 +207,43 @@ const Home = () => {
   useEffect(() => {
     let isMounted = true;
 
-    Promise.all([
+    Promise.allSettled([
       fetchSanityNews({ limit: 3 }),
       fetchSanityPortfolio({ limit: 3, latest: true }),
       fetchSanityTestimonials({ limit: 20 }),
     ])
-      .then(([newsItems, portfolioItems, testimonialItems]) => {
+      .then(([newsResult, portfolioResult, testimonialResult]) => {
         if (!isMounted) {
           return;
         }
 
-        setFeaturedNews(newsItems.map(mapNewsItem));
-        setFeaturedPortfolio(portfolioItems.map(mapPortfolioItem));
+        const newsItems =
+          newsResult.status === "fulfilled" ? newsResult.value : [];
+        const portfolioItems =
+          portfolioResult.status === "fulfilled" ? portfolioResult.value : [];
+        const testimonialItems =
+          testimonialResult.status === "fulfilled" ? testimonialResult.value : [];
+
+        setFeaturedNews(newsItems.map(mapNewsItem).filter(Boolean));
+        setFeaturedPortfolio(portfolioItems.map(mapPortfolioItem).filter(Boolean));
         setActiveNewsIndex(0);
         setActivePortfolioIndex(0);
 
         if (testimonialItems.length > 0) {
-          setCustomerTestimonials(testimonialItems.map(mapTestimonialItem));
-        }
-      })
-      .catch(() => {
-        if (!isMounted) {
-          return;
+          setCustomerTestimonials(
+            testimonialItems.map(mapTestimonialItem).filter(Boolean),
+          );
         }
 
-        setFeaturedNews([]);
-        setFeaturedPortfolio([]);
+        if (
+          newsResult.status === "rejected" ||
+          portfolioResult.status === "rejected" ||
+          testimonialResult.status === "rejected"
+        ) {
+          setHomeContentError("部分首頁內容暫時無法載入，請稍後再試。");
+        } else {
+          setHomeContentError("");
+        }
       })
       .finally(() => {
         if (isMounted) {
@@ -296,6 +323,11 @@ const Home = () => {
 
       <section className="py-5">
         <div className="container">
+          {homeContentError ? (
+            <div className="alert alert-warning home-reveal" role="alert">
+              {homeContentError}
+            </div>
+          ) : null}
           <div className="d-flex flex-column align-items-center text-center gap-3 mb-4 home-reveal">
             <div>
               <h2 className="display-6 fw-bold section-line-title">熱門服務</h2>

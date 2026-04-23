@@ -293,19 +293,6 @@ npx husky add .husky/pre-commit "npx lint-staged"
 
 ## 🟡 建議優化（可選）
 
-### 10. **README 文檔過時** [低]
-**位置**：`README.md`
-
-**問題**：
-```markdown
-# 美髮沙龍網站
-- 技術架構：HTML5 + CSS3 + JavaScript  ❌ (實際是 React + Vite + Bootstrap)
-- 靜態網站架構                          ❌ (實際用 React Router)
-- 預約功能為前端模擬                    ❌ (實際有 Sanity CMS 集成)
-```
-
-**改進建議**：
-```markdown
 # VOV Hair Salon 美髮沙龍網站
 
 ## 技術棧

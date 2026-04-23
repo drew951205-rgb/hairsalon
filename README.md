@@ -12,10 +12,11 @@
 - **聯絡頁面**：店家資訊、交通指引
 
 ## 技術架構
-
-- HTML5 + CSS3 + JavaScript
-- Bootstrap 5 響應式框架
-- 靜態網站架構
+ **前端**：React 18 + Vite + React Router
+- **樣式**：Bootstrap 5 + CSS3
+- **內容管理**：Sanity CMS
+- **後端API**：Node.js Express / Vercel Functions
+- **部署**：Vercel
 
 ## 使用說明
 

@@ -149,17 +149,6 @@ const mapSanityPortfolioItem = (item) => {
   };
 };
 
-const flattenPortfolioGroups = (groups) =>
-  groups.flatMap((group) =>
-    group.items
-      .filter((item) => item.image)
-      .map((item) => ({
-        ...item,
-        category: group.category,
-        imagePath: item.lightboxImage || item.image,
-      })),
-  );
-
 const preloadPortfolioImage = (item) => {
   if (!item?.imagePath) {
     return;
@@ -193,10 +182,6 @@ const Portfolio = () => {
           )
         : portfolioGroups,
     [portfolioGroups, normalizedSelectedCategory],
-  );
-  const visiblePortfolioItems = useMemo(
-    () => flattenPortfolioGroups(visiblePortfolioGroups),
-    [visiblePortfolioGroups],
   );
   const activeLightboxImages = useMemo(() => {
     if (!activeItem) {

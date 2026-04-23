@@ -23,6 +23,7 @@ import ChiayiHairColor from "./pages/ChiayiHairColor";
 import ChiayiExosomeScalpSpa from "./pages/ChiayiExosomeScalpSpa";
 import ChiayiScalpSpa from "./pages/ChiayiScalpSpa";
 import Seo from "./components/Seo";
+import ErrorBoundary from "./components/ErrorBoundary";
 import { navItems } from "./data";
 
 const ScrollToTop = () => {
@@ -325,24 +326,26 @@ const AppShell = () => {
       ) : null}
 
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/:slug" element={<NewsDetail />} />
-          <Route path="/chiayi-haircut" element={<ChiayiHaircut />} />
-          <Route path="/chiayi-perm" element={<ChiayiPerm />} />
-          <Route path="/chiayi-hair-color" element={<ChiayiHairColor />} />
-          <Route
-            path="/chiayi-exosome-scalp-spa"
-            element={<ChiayiExosomeScalpSpa />}
-          />
-          <Route path="/chiayi-scalp-spa" element={<ChiayiScalpSpa />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/stylists" element={<Stylists />} />
-          <Route path="/booking" element={<Booking />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <ErrorBoundary resetKey={location.pathname}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:slug" element={<NewsDetail />} />
+            <Route path="/chiayi-haircut" element={<ChiayiHaircut />} />
+            <Route path="/chiayi-perm" element={<ChiayiPerm />} />
+            <Route path="/chiayi-hair-color" element={<ChiayiHairColor />} />
+            <Route
+              path="/chiayi-exosome-scalp-spa"
+              element={<ChiayiExosomeScalpSpa />}
+            />
+            <Route path="/chiayi-scalp-spa" element={<ChiayiScalpSpa />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/stylists" element={<Stylists />} />
+            <Route path="/booking" element={<Booking />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </ErrorBoundary>
       </main>
 
       {!isBookingPage && <Footer />}
