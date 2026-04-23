@@ -1,0 +1,228 @@
+﻿node.exe : > [debug] [2026-04-08T16:46:45.105Z] Found config in file "C:\Users\
+USER\Downloads\?啣?鞈?憭閱vercel.json"
+位於 C:\Users\USER\AppData\Roaming\npm\vercel.ps1:24 字元:5
++     & "node$exe"  "$basedir/node_modules/vercel/dist/vc.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (> [debug] [2026...?憭閱vercel.json" 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+> [debug] [2026-04-08T16:46:45.105Z] Vercel CLI 50.41.0
+> [debug] [2026-04-08T16:46:45.110Z] Agent/TTY/nonInteractive: isAgent=false ag
+entName=none stdin.isTTY=true --non-interactive=false explicitFalse=false => no
+nInteractive=false
+> [debug] [2026-04-08T16:46:45.111Z] user supplied a possible target for deploy
+ment or an extension
+> [debug] [2026-04-08T16:46:45.117Z] failed to find extension command with name
+ "vercel---prod"
+> [debug] [2026-04-08T16:46:45.145Z] Setting target to production
+> [debug] [2026-04-08T16:46:45.152Z] Spinner invoked (Retrieving project?? with
+ a 1000ms delay
+> [debug] [2026-04-08T16:46:45.153Z] Valid access token, skipping token refresh
+.
+> [debug] [2026-04-08T16:46:45.171Z] #1 ??GET https://api.vercel.com/teams/team
+_gWaNFsJ5YM8j5j2wmyJwguh2
+> [debug] [2026-04-08T16:46:45.172Z] #2 ??GET https://api.vercel.com/v9/project
+s/prj_VR0Fg9pjDY6GquTXTITSAqnEbfxW?teamId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+> [debug] [2026-04-08T16:46:45.688Z] #2 ??200 OK: sfo1::cckpd-1775666804094-30c
+ce347497b [516ms]
+> [debug] [2026-04-08T16:46:45.707Z] #1 ??200 OK: sfo1::crpth-1775666804084-f27
+4d3a59a70 [536ms]
+> [debug] [2026-04-08T16:46:45.708Z] Error while parsing repo data: ENOENT: no 
+such file or directory, open 'C:\Users\USER\Downloads\?啣?鞈?憭閱.git\config'
+> [debug] [2026-04-08T16:46:45.718Z] Failed to get last commit. The directory i
+s likely not a Git repo, there are no latest commits, or it is corrupted.
+Error: this does not look like a git repo
+> [debug] [2026-04-08T16:46:45.721Z] Spinner invoked (Deploying drew951205-5863
+s-projects/vov-hair-salon) with a 0ms delay
+[client-debug] 2026-04-08T16:46:45.721Z Creating deployment...
+[client-debug] 2026-04-08T16:46:45.721Z Provided 'path' is a directory.
+[client-debug] 2026-04-08T16:46:45.722Z Found 26 rules in .vercelignore
+[client-debug] 2026-04-08T16:46:45.722Z Building file tree...
+[client-debug] 2026-04-08T16:46:45.726Z Found 29 files in the specified directo
+ry
+[client-debug] 2026-04-08T16:46:45.730Z Yielding a 'hashes-calculated' event wi
+th 27 hashes
+> [debug] [2026-04-08T16:46:45.731Z] #3 ??GET https://api.vercel.com/v9/project
+s/vov-hair-salon?teamId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+> [debug] [2026-04-08T16:46:45.932Z] #3 ??200 OK: sfo1::7md5c-1775666804340-9b6
+ea5e152b4 [201ms]
+[client-debug] 2026-04-08T16:46:45.933Z Using provided API URL: https://api.ver
+cel.com
+[client-debug] 2026-04-08T16:46:45.933Z Using provided user agent: vercel 50.41
+.0 node-v22.20.0 win32 (x64)
+[client-debug] 2026-04-08T16:46:45.933Z Setting platform version to harcoded va
+lue 2
+[client-debug] 2026-04-08T16:46:45.933Z Creating the deployment and starting up
+load...
+[client-debug] 2026-04-08T16:46:45.933Z Determining necessary files for upload.
+..
+[client-debug] 2026-04-08T16:46:45.933Z Creating deployment
+[client-debug] 2026-04-08T16:46:45.934Z Sending deployment creation API request
+[client-debug] 2026-04-08T16:46:46.182Z Deployment response: {"error":{"code":"
+missing_files","message":"Missing files","missing":["ab01157f7bc5b31e731a824f96
+b71f4be27254a8"]}}
+[client-debug] 2026-04-08T16:46:46.182Z Error: Deployment request status is 400
+[client-debug] 2026-04-08T16:46:46.182Z 1 files are required to upload
+[client-debug] 2026-04-08T16:46:46.182Z Yielding a 'file-count' event
+> [debug] [2026-04-08T16:46:46.182Z] Total files 27, 1 changed
+> [debug] [2026-04-08T16:46:46.182Z] Spinner invoked (Uploading [--------------
+------] (0.0B/2.4KB)) with a 0ms delay
+[client-debug] 2026-04-08T16:46:46.183Z Building an upload list...
+[client-debug] 2026-04-08T16:46:46.183Z Starting upload
+[client-debug] 2026-04-08T16:46:46.184Z POST https://api.vercel.com/v2/files?te
+amId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+> [debug] [2026-04-08T16:46:46.184Z] Spinner invoked (Uploading [==============
+======] (2.4KB/2.4KB)) with a 0ms delay
+[client-debug] 2026-04-08T16:46:46.472Z DONE in 288ms: POST https://api.vercel.
+com/v2/files?teamId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+[client-debug] 2026-04-08T16:46:46.473Z File ab01157f7bc5b31e731a824f96b71f4be2
+7254a8 (C:\Users\USER\Downloads\?啣?鞈?憭閱vercel-debug.txt) uploaded
+[client-debug] 2026-04-08T16:46:46.473Z Yielding a 'file-uploaded' event
+> [debug] [2026-04-08T16:46:46.473Z] Uploaded: C:\Users\USER\Downloads\?啣?鞈?憭閱
+vercel-debug.txt (2.45KB)
+[client-debug] 2026-04-08T16:46:46.473Z All files uploaded
+[client-debug] 2026-04-08T16:46:46.473Z Yielding a 'all-files-uploaded' event
+[client-debug] 2026-04-08T16:46:46.473Z Starting deployment creation
+[client-debug] 2026-04-08T16:46:46.473Z Creating deployment
+[client-debug] 2026-04-08T16:46:46.473Z Sending deployment creation API request
+[client-debug] 2026-04-08T16:46:47.667Z Deployment response: {"alias":["vov-hai
+r-salon-drew951205-5863s-projects.vercel.app","vov-hair-salon-drew951205-5863-d
+rew951205-5863s-projects.vercel.app"],"aliasAssigned":false,"automaticAliases":
+["vov-hair-salon-drew951205-5863s-projects.vercel.app","vov-hair-salon-drew9512
+05-5863-drew951205-5863s-projects.vercel.app"],"bootedAt":1775666805460,"buildi
+ngAt":1775666805460,"buildSkipped":false,"createdAt":1775666805460,"creator":{"
+uid":"7wL8QmhNEKSVX5uCV6Tok3Ez","username":"drew951205-5863"},"id":"dpl_roaDtra
+BWD7j1uVuQxneUzE8kex5","name":"vov-hair-salon","meta":{},"originCacheRegion":"i
+ad1","project":{"id":"prj_VR0Fg9pjDY6GquTXTITSAqnEbfxW","name":"vov-hair-salon"
+,"framework":null},"public":false,"readyState":"INITIALIZING","regions":["iad1"
+],"source":"cli","status":"INITIALIZING","target":"production","team":{"id":"te
+am_gWaNFsJ5YM8j5j2wmyJwguh2","name":"drew951205-5863's projects","slug":"drew95
+1205-5863s-projects"},"type":"LAMBDAS","url":"vov-hair-salon-ld8ue56sz-drew9512
+05-5863s-projects.vercel.app","version":2,"previewCommentsEnabled":true,"oidcTo
+kenClaims":{"sub":"owner:drew951205-5863s-projects:project:vov-hair-salon:envir
+onment:production","iss":"https://oidc.vercel.com/drew951205-5863s-projects","s
+cope":"owner:drew951205-5863s-projects:project:vov-hair-salon:environment:produ
+ction","aud":"https://vercel.com/drew951205-5863s-projects","owner":"drew951205
+-5863s-projects","owner_id":"team_gWaNFsJ5YM8j5j2wmyJwguh2","project":"vov-hair
+-salon","project_id":"prj_VR0Fg9pjDY6GquTXTITSAqnEbfxW","environment":"producti
+on","plan":"hobby"},"lambdas":[{"id":"bld_3awnlvyeb","createdAt":1775666805699,
+"entrypoint":".","readyState":"READY","readyStateAt":1775666805699,"output":[]}
+],"aliasAssignedAt":null,"build":{"env":[]},"builds":[{"src":"package.json","us
+e":"@vercel/static-build","config":{"distDir":"dist"}}],"createdIn":"sfo1","env
+":[],"functions":null,"inspectorUrl":"https://vercel.com/drew951205-5863s-proje
+cts/vov-hair-salon/roaDtraBWD7j1uVuQxneUzE8kex5","isInConcurrentBuildsQueue":fa
+lse,"isInSystemBuildsQueue":true,"ownerId":"team_gWaNFsJ5YM8j5j2wmyJwguh2","pla
+n":"hobby","projectId":"prj_VR0Fg9pjDY6GquTXTITSAqnEbfxW","projectSettings":{"b
+uildCommand":null,"devCommand":null,"commandForIgnoringBuildStep":null,"install
+Command":null,"outputDirectory":null,"speedInsights":{"id":"zYChJwfmtjnNVSUmn0T
+zYFjQfkn","hasData":false},"webAnalytics":{"id":"iLuyBy2nMPW3Wa2LUDzEhpPPw"},"n
+odeVersion":"24.x"},"routes":[{"src":"^/api/(.*)$","dest":"/api/$1"},{"src":"^/
+(.*)$","dest":"/dist/$1"}],"config":{"version":1,"secureComputePrimaryRegion":n
+ull,"secureComputeFallbackRegion":null,"functionTimeout":300,"functionType":"fl
+uid","functionMemoryType":"standard","isUsingActiveCPU":true,"resourceConfig":{
+"buildQueue":{"configuration":"SKIP_NAMESPACE_QUEUE"}}}}
+[client-debug] 2026-04-08T16:46:47.667Z Deployment created with a warning:  Due
+ to `builds` existing in your configuration file, the Build and Development Set
+tings defined in your Project Settings will not apply. Learn More: https://verc
+el.link/unused-build-settings
+[client-debug] 2026-04-08T16:46:47.667Z Yielding a 'warning' event
+[client-debug] 2026-04-08T16:46:47.667Z Deployment created
+[client-debug] 2026-04-08T16:46:47.667Z Yielding a 'created' event
+Inspect: https://vercel.com/drew951205-5863s-projects/vov-hair-salon/roaDtraBWD
+7j1uVuQxneUzE8kex5 [2s]
+Production: https://vov-hair-salon-ld8ue56sz-drew951205-5863s-projects.vercel.a
+pp [2s]
+> [debug] [2026-04-08T16:46:47.667Z] Spinner invoked (Building...) with a 0ms d
+elay
+> [debug] [2026-04-08T16:46:47.668Z] #4 ??GET https://api.vercel.com/v2/user
+[client-debug] 2026-04-08T16:46:47.668Z Waiting for deployment to be ready...
+[client-debug] 2026-04-08T16:46:47.668Z Waiting for builds and the deployment t
+o complete...
+> [debug] [2026-04-08T16:46:47.841Z] #4 ??200 OK: sfo1::p497d-1775666806282-e2f
+539e5d5c5 [173ms]
+> [debug] [2026-04-08T16:46:47.842Z] #5 ??GET https://api.vercel.com/v3/now/dep
+loyments/dpl_roaDtraBWD7j1uVuQxneUzE8kex5/events?direction=forward&follow=1&for
+mat=lines&teamId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+[client-debug] 2026-04-08T16:46:49.529Z Deployment state changed to BUILDING
+[client-debug] 2026-04-08T16:46:49.529Z Yielding a 'building' event
+> [debug] [2026-04-08T16:46:49.529Z] Spinner invoked (Building...) with a 0ms d
+elay
+> [debug] [2026-04-08T16:46:50.272Z] #5 ??200 OK: sfo1::f89ln-1775666806454-4b8
+724fbed69 [2.43s]
+> [debug] [2026-04-08T16:46:50.273Z] Spinner invoked (Building: Running build i
+n Washington, D.C., USA (East) ??iad1) with a 0ms delay
+> [debug] [2026-04-08T16:46:50.273Z] Spinner invoked (Building: Build machine c
+onfiguration: 2 cores, 8 GB) with a 0ms delay
+> [debug] [2026-04-08T16:46:50.273Z] Spinner invoked (Building: Retrieving list
+ of deployment files...) with a 0ms delay
+> [debug] [2026-04-08T16:46:51.388Z] Spinner invoked (Building: Downloading 29 
+deployment files...) with a 0ms delay
+> [debug] [2026-04-08T16:46:51.388Z] Spinner invoked (Building: Restored build 
+cache from previous deployment (8vKAVBQ8VuqyFabFFzNyzAR2VJBo)) with a 0ms delay
+> [debug] [2026-04-08T16:46:51.388Z] Spinner invoked (Building: Running "vercel
+ build") with a 0ms delay
+> [debug] [2026-04-08T16:46:52.490Z] Spinner invoked (Building: Vercel CLI 50.3
+8.2) with a 0ms delay
+> [debug] [2026-04-08T16:46:52.490Z] Spinner invoked (Building: WARNING! Due to
+ `builds` existing in your configuration file, the Build and Development Settin
+gs defined in your Project Settings will not apply. Learn More: https://vercel.
+link/unused-build-settings) with a 0ms delay
+> [debug] [2026-04-08T16:46:52.490Z] Spinner invoked (Building: Installing depe
+ndencies...) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: up to date in 5
+78ms) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: 26 packages are
+ looking for funding) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: run `npm fund` 
+for details) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: Running "npm ru
+n build") with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: > hair-salon-re
+act@0.1.0 build) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: > vite build) w
+ith a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: vite v5.4.21 bu
+ilding for production...) with a 0ms delay
+> [debug] [2026-04-08T16:46:53.569Z] Spinner invoked (Building: transforming...
+) with a 0ms delay
+> [debug] [2026-04-08T16:46:54.670Z] Spinner invoked (Building: ??43 modules tr
+ansformed.) with a 0ms delay
+[client-debug] 2026-04-08T16:46:55.068Z Deployment state changed to READY
+[client-debug] 2026-04-08T16:46:55.068Z Yielding a 'ready' event
+[2K[1A[2K[GProduction: https://vov-hair-salon-ld8ue56sz-drew951205-5863s-pr
+ojects.vercel.app [9s]
+> [debug] [2026-04-08T16:46:55.069Z] Spinner invoked (Completing...) with a 0ms
+ delay
+[client-debug] 2026-04-08T16:46:55.069Z Deployment alias assigned
+[client-debug] 2026-04-08T16:46:55.069Z Deployment is ready
+[client-debug] 2026-04-08T16:46:55.069Z Yielding a 'alias-assigned' event
+Aliased: https://vov-hair-salon.vercel.app [9s]
+> [debug] [2026-04-08T16:46:55.069Z] #6 ??GET https://api.vercel.com/v13/deploy
+ments/dpl_roaDtraBWD7j1uVuQxneUzE8kex5?teamId=team_gWaNFsJ5YM8j5j2wmyJwguh2
+> [debug] [2026-04-08T16:46:55.435Z] #6 ??200 OK: sfo1::2rzsq-1775666813681-af0
+17db3dc9b [366ms]
+Due to `builds` existing in your configuration file, the Build and Development 
+Settings defined in your Project Settings will not apply. Learn More: https://v
+ercel.link/unused-build-settings
+> [debug] [2026-04-08T16:46:57.452Z] Telemetry subprocess killed due to timeout
+> [debug] [2026-04-08T16:46:57.462Z] Telemetry subprocess exited with code null
+> [debug] [2026-04-08T16:46:57.463Z] Spawning C:\Users\USER\AppData\Roaming\npm
+\node_modules\vercel\dist\get-latest-worker.cjs
+> '[debug] [2026-04-08T16:46:57.493Z] Notifying parent we're ready
+> '[debug] [2026-04-08T16:46:57.495Z] Received message from parent: {
+  cacheFile: 'C:\\Users\\USER\\AppData\\Local\\com.vercel.cli\\Cache\\package-u
+pdates\\vercel-latest.json',
+  distTag: 'latest',
+  name: 'vercel',
+  updateCheckInterval: 86400000
+}
+> '[debug] [2026-04-08T16:46:57.495Z] Disconnecting from parent
+> '[debug] [2026-04-08T16:46:57.496Z] Checking lock file: C:\Users\USER\AppData
+\Local\com.vercel.cli\Cache\package-updates\vercel-latest.lock
+> '[debug] [2026-04-08T16:46:57.497Z] Found lock file with pid: 7792
+> '[debug] [2026-04-08T16:46:57.497Z] Resetting lock file: Error: kill ESRCH
+> '[debug] [2026-04-08T16:46:57.498Z] Initializing lock file with pid 26492
+> '[debug] [2026-04-08T16:46:57.498Z] Fetching https://registry.npmjs.org/-/pac
+kage/vercel/dist-tags
+https://vov-hair-salon-ld8ue56sz-drew951205-5863s-projects.vercel.app

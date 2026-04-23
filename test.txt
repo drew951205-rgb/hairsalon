@@ -1,0 +1,28 @@
+4/12
+新增最新消息可以加多張圖片
+跟可以閱讀更多
+以及圖片仔入更快
+版面重新更新
+優化SEO
+每一篇文章都設定專屬網址，讓網址是可以看得懂的名稱，這樣不只看起來比較專業，也有助於Google搜尋排名。
+① 地區＋服務＋推薦
+taipei-hair-salon-recommend
+chiayi-haircut-recommend
+② 問題型（很吃 SEO🔥）
+how-to-fix-damaged-hair
+why-hair-is-dry
+how-often-should-you-perm
+③ 趨勢型（很好吸流量）
+hair-trend-2026
+korean-hair-style-2026
+④ 價格型（會帶客🔥）
+hair-color-price-taipei
+perm-price-2026
+4/13
+首頁都設定抓最新三頁然後最新消息設定分頁一頁抓8張 home.jsx 181
+圖片加入滑動效果然後優化圖片加載速度
+把seo拉到99分
+我有對我的作品做實際壓力測試，在 Vercel 正式環境下模擬 50 人同時瀏覽，所有請求都是 200 OK，沒有出現 429 或 5xx。20 人持續 5 分鐘的測試中，平均延遲約 60ms，也沒有隨時間變慢。
+4/14
+加入動畫，排版優化
+更新作品集展示畫面，用拍貼機的感覺去做
