@@ -36,14 +36,14 @@ app.post("/api/contact", async (req, res) => {
   try {
     await Promise.all([
       transporter.sendMail({
-        from: `VOV hair salon <${contactSender}>`,
+        from: `VOV Hair Salon <${contactSender}>`,
         to: contactRecipient,
         replyTo: email,
-        subject: `VOV hair salon contact form: ${name}`,
+        subject: `VOV Hair Salon contact form: ${name}`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
       }),
       transporter.sendMail({
-        from: `VOV hair salon <${contactSender}>`,
+        from: `VOV Hair Salon <${contactSender}>`,
         to: email,
         replyTo: contactRecipient,
         subject: "VOV Hair Salon 已收到您的訊息",
