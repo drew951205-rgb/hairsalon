@@ -31,11 +31,11 @@
 
 .about-reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: none;
 }
 
 .about-reveal.is-visible {
-  animation: about-fade-up 0.8s ease forwards;
+  animation: about-fade-in 0.45s ease forwards;
 }
 
 .about-top-image {
@@ -507,15 +507,13 @@
   z-index: 120;
 }
 
-@keyframes about-fade-up {
+@keyframes about-fade-in {
   from {
     opacity: 0;
-    transform: translateY(22px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 

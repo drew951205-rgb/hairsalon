@@ -173,6 +173,7 @@ html {
 }
 
 .site-splash {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 3000;
@@ -402,11 +403,11 @@ html {
 
 .home-reveal {
   opacity: 0;
-  transform: translateY(18px);
+  transform: none;
 }
 
 .home-reveal.is-visible {
-  animation: title-fade-up 0.75s ease forwards;
+  animation: title-fade-in 0.45s ease forwards;
 }
 
 .home .home-more-action.is-visible,
@@ -414,15 +415,13 @@ html {
   animation-delay: 0.18s;
 }
 
-@keyframes title-fade-up {
+@keyframes title-fade-in {
   from {
     opacity: 0;
-    transform: translateY(18px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -784,11 +783,11 @@ section h3 {
 
 .services-menu-page .services-reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: none;
 }
 
 .services-menu-page .services-reveal.is-visible {
-  animation: services-fade-up 0.78s ease forwards;
+  animation: services-fade-in 0.45s ease forwards;
 }
 
 .services-menu-heading {
@@ -864,12 +863,12 @@ section h3 {
 
 .services-price-row > div {
   opacity: 0;
-  transform: translateX(-24px);
+  transform: none;
 }
 
 .services-price-row strong {
   opacity: 0;
-  transform: translateX(24px);
+  transform: none;
 }
 
 .services-price-row.is-visible > div {
@@ -908,11 +907,11 @@ section h3 {
   justify-content: flex-end;
   margin-top: 1rem;
   opacity: 0;
-  transform: translateX(24px);
+  transform: none;
 }
 
 .services-menu-action.is-visible {
-  animation: services-fade-right 0.72s ease forwards;
+  animation: services-fade-in 0.45s ease forwards;
 }
 
 .services-menu-cta {
@@ -940,39 +939,33 @@ section h3 {
   line-height: 1.9;
 }
 
-@keyframes services-fade-up {
+@keyframes services-fade-in {
   from {
     opacity: 0;
-    transform: translateY(22px);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 @keyframes services-fade-left {
   from {
     opacity: 0;
-    transform: translateX(-24px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
 @keyframes services-fade-right {
   from {
     opacity: 0;
-    transform: translateX(24px);
   }
 
   to {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 

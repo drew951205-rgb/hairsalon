@@ -221,8 +221,8 @@ const Footer = () => (
 
 const AppShell = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSiteLoading, setIsSiteLoading] = useState(true);
-  const [isSiteLoadingLeaving, setIsSiteLoadingLeaving] = useState(false);
+  const isSiteLoading = false;
+  const isSiteLoadingLeaving = false;
   const location = useLocation();
   const isBookingPage = location.pathname === "/booking";
   const seoPath = location.pathname === "/about" ? "/stylists" : location.pathname;
@@ -237,20 +237,6 @@ const AppShell = () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
-
-  useEffect(() => {
-    const leaveTimer = window.setTimeout(() => {
-      setIsSiteLoadingLeaving(true);
-    }, 1800);
-    const removeTimer = window.setTimeout(() => {
-      setIsSiteLoading(false);
-    }, 2300);
-
-    return () => {
-      window.clearTimeout(leaveTimer);
-      window.clearTimeout(removeTimer);
-    };
-  }, []);
 
   return (
     <div className="app-shell">
