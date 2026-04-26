@@ -52,6 +52,19 @@
   filter: grayscale(18%) sepia(10%) brightness(0.95);
 }
 
+@media (min-width: 769px) {
+  .about-top-image {
+    background-image: url("/assets/desktophero.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .about-top-image img {
+    opacity: 0 !important;
+    visibility: hidden;
+  }
+}
+
 .about-story-hero {
   margin-top: -4.5rem;
   padding: 0 1.5rem 5rem;

@@ -5,62 +5,90 @@ import ScrollTopButton from "../components/ScrollTopButton";
 const philosophyItems = [
   {
     label: "Philosophy 01",
-    title: "留白，不是空白",
+    title: "用溝通找出最適合的風格",
     description:
-      "我們相信真正耐看的髮型，不是把所有技巧堆滿，而是為每個人留下剛剛好的空間與呼吸感。",
+      "我們重視每一次諮詢，從髮質、臉型、穿搭到日常整理習慣，陪你找到好看也好維持的髮型。",
   },
   {
     label: "Philosophy 02",
-    title: "設計，要回到生活",
+    title: "細節決定髮型的質感",
     description:
-      "從輪廓、髮流到整理方式，我們重視的是妳走出沙龍後，依然能輕鬆維持的質感。",
+      "剪裁線條、髮色層次與燙髮捲度都會影響整體氛圍，我們用細緻技術呈現自然耐看的效果。",
   },
   {
     label: "Philosophy 03",
-    title: "服務，是一種節奏",
+    title: "讓每次整理都更輕鬆",
     description:
-      "從諮詢到完成，每個步驟都希望讓人放鬆下來，慢慢找到最適合自己的樣子。",
+      "好的髮型不只在沙龍好看，也要能融入你的生活，讓每天出門前的整理變得簡單自在。",
   },
 ];
 
-const stylistHighlights = [
+const displayedStylists = [
   {
     name: "Jenny",
-    role: "自然感輪廓設計",
+    role: "經理/設計師",
     description:
-      "擅長以乾淨線條與柔和層次，調整臉型比例與整體氣質，讓髮型在日常也能維持輕盈與俐落。",
+      "擅長韓系燙髮、柔霧髮色與臉型修飾，依照每位客人的髮質與生活習慣設計好整理的髮型。",
     image: "/assets/jenny.webp",
-    imageAlt: "VOV Hair Salon 自然感長髮造型作品",
+    imageAlt: "VOV Hair Salon 設計師 Jenny",
     alignment: "left",
   },
   {
-    name: "翁大俠",
-    role: "空氣感燙髮風格",
-    description: "專注於躺平，順順利利，阿里嘎都",
-    image: "/assets/weng.webp",
-    imageAlt: "VOV Hair Salon 空氣感燙髮作品",
+    name: "NIKO",
+    role: "男士剪裁設計師",
+    description:
+      "專注男士剪髮、層次修剪與自然造型，打造乾淨俐落又適合日常整理的髮型。",
+    image: "/assets/niko.jpg",
+    imageAlt: "VOV Hair Salon 設計師 NIKO",
     alignment: "right",
   },
   {
-    name: "Gloss & Flow",
-    role: "質感染髮與修護",
+    name: "家嫻",
+    role: "質感染燙設計師",
     description:
-      "重視霧感、光澤與膚色協調，讓顏色不只好看，更能自然融入個人氣場與穿搭。",
-    image: "/assets/大捲.jpg",
-    imageAlt: "VOV Hair Salon 柔霧光澤感髮型作品",
+      "擅長自然捲度、霧感髮色與日常好整理的髮型規劃，重視溝通與整體風格比例。",
+    image: "/assets/chia.webp",
+    imageAlt: "VOV Hair Salon 設計師家嫻",
     alignment: "left",
+  },
+  {
+    name: "靖惠",
+    role: "店長/設計師",
+    description:
+      "擅長依膚色與髮況設計髮色，搭配柔和線條修飾臉型，呈現自然有精神的造型。",
+    image: "/assets/jin.webp",
+    imageAlt: "VOV Hair Salon 設計師靖惠",
+    alignment: "right",
+  },
+  {
+    name: "WINO",
+    role: "造型設計師",
+    description:
+      "擅長依照臉型與個人風格打造俐落有型的剪裁，讓髮型自然好整理，也能展現個人特色。",
+    image: "/assets/wino.jpg",
+    imageAlt: "VOV Hair Salon 設計師 WINO",
+    alignment: "left",
+  },
+  {
+    name: "妲妮",
+    role: "頭皮SPA護理設計師",
+    description:
+      "具備頭皮護理專業知識與實務經驗，熟悉各類頭皮問題判斷與處理，能依據顧客需求提供客製化療程建議。擅長頭皮SPA按摩技術，結合產品應用與護理流程，提升頭皮健康與顧客舒適度，致力於打造長期穩定的頭皮保養方案。",
+    image: "/assets/tani.jpg",
+    imageAlt: "VOV Hair Salon 設計師妲妮",
+    alignment: "right",
   },
 ];
 
 const environmentImages = [
   {
     image: "/assets/first.webp",
-    imageAlt: "VOV Hair Salon 店內空間一角",
+    imageAlt: "VOV Hair Salon 店內空間",
     className: "primary",
   },
   {
     image: "/assets/hero.png",
-    imageAlt: "VOV Hair Salon 自然光髮型作品",
+    imageAlt: "VOV Hair Salon 沙龍形象",
     className: "secondary",
   },
 ];
@@ -110,7 +138,7 @@ const Stylists = () => {
       <section className="about-top-image">
         <img
           src="/assets/first.webp"
-          alt="VOV Hair Salon 嘉義髮廊空間"
+          alt="VOV Hair Salon 店內形象"
           className="about-reveal is-visible"
         />
       </section>
@@ -123,7 +151,7 @@ const Stylists = () => {
             <p className="about-story-kicker">VOV Hair Salon</p>
             <h1 className="about-story-title">About Us</h1>
             <p className="about-story-subtitle">Our Story</p>
-            <p className="about-story-mark">心・美・感</p>
+            <p className="about-story-mark">用髮型記錄你的每個重要時刻</p>
           </div>
         </div>
       </section>
@@ -132,22 +160,18 @@ const Stylists = () => {
         <div className="container">
           <div className="about-intro-layout">
             <div className="about-side-label about-reveal">
-              <span>開店初衷</span>
+              <span>關於我們</span>
             </div>
             <div className="about-intro-copy about-reveal">
               <p className="about-intro-lead">
-                我們希望把整理頭髮這件事，變成一段可以安靜下來、
-                重新看見自己的時間。
+                VOV Hair Salon 希望每位來到店裡的客人，都能在放鬆的節奏中找到更適合自己的樣子。
               </p>
               <div className="about-divider" aria-hidden="true" />
               <p>
-                VOV 相信，好看的髮型不只存在於拍照當下，而是要能回到真實
-                生活裡，陪你上班、約會、旅行，也陪你度過每一個普通卻重要的日子。
+                我們相信髮型不只是造型，更是一種生活狀態。從剪髮、染髮、燙髮到頭皮護理，每一項服務都從溝通開始，讓設計更貼近你的需求。
               </p>
               <p>
-                從剪裁、染燙到頭皮養護，我們在意的不只是做完之後的樣子，
-                更是在這段過程裡，你是否被好好傾聽、被溫柔對待，也終於找到
-                屬於自己的舒服節奏。
+                無論你想換一個新的風格，或只是想讓日常整理更輕鬆，我們都會以專業判斷與細緻技術，陪你完成適合自己的改變。
               </p>
             </div>
           </div>
@@ -158,7 +182,7 @@ const Stylists = () => {
         <div className="container">
           <div className="about-section-heading about-reveal">
             <p>Philosophy</p>
-            <h2>關於 VOV，我們想留下的感受</h2>
+            <h2>我們在意的，不只是完成一款髮型</h2>
           </div>
           <div className="about-philosophy-grid">
             {philosophyItems.map((item) => (
@@ -184,7 +208,7 @@ const Stylists = () => {
           </div>
 
           <div className="about-team-list">
-            {stylistHighlights.map((item) => (
+            {displayedStylists.map((item) => (
               <article
                 className={`about-team-card about-reveal ${item.alignment}`}
                 key={item.name}
@@ -232,17 +256,16 @@ const Stylists = () => {
         <div className="container">
           <div className="about-cta-card about-reveal">
             <p className="about-card-label">Next Step</p>
-            <h2>讓下一次整理頭髮，變成一次真正適合你的設計體驗</h2>
+            <h2>想整理髮型，或想換一個更適合自己的風格嗎？</h2>
             <p>
-              如果你也喜歡這種安靜、乾淨、有留白感的風格，我們很期待在 VOV
-              和你見面。
+              歡迎先預約諮詢，讓設計師依照你的髮況、需求與生活習慣，安排最適合的服務。
             </p>
             <div className="about-cta-actions">
               <Link to="/booking" className="about-cta-button primary">
                 立即預約
               </Link>
               <Link to="/portfolio" className="about-cta-button secondary">
-                看更多作品
+                查看作品
               </Link>
             </div>
           </div>
