@@ -1,5 +1,6 @@
 /* 自定義樣式 */
 :root {
+  color-scheme: light;
   --brand-bg: #fcf5f3;
   --brand-accent: #f7b4a8;
   --brand-accent-deep: #e59484;
@@ -24,6 +25,7 @@ body {
 }
 
 html {
+  background-color: #fff7f5;
   scroll-behavior: smooth;
 }
 
