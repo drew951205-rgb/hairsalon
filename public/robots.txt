@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vov-hair-salon.vercel.app/sitemap.xml
+Sitemap: https://www.vovhairsalon.com/sitemap.xml
