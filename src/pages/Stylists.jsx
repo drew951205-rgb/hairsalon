@@ -82,13 +82,23 @@ const displayedStylists = [
 
 const environmentImages = [
   {
-    image: "/assets/first.webp",
+    image: "/assets/20546_0.jpg",
     imageAlt: "VOV Hair Salon 店內空間",
     className: "primary",
   },
   {
-    image: "/assets/hero.png",
+    image: "/assets/20547_0.jpg",
     imageAlt: "VOV Hair Salon 沙龍形象",
+    className: "secondary",
+  },
+  {
+    image: "/assets/20548_0.jpg",
+    imageAlt: "VOV Hair Salon 店內環境照片",
+    className: "primary",
+  },
+  {
+    image: "/assets/20549_0.jpg",
+    imageAlt: "VOV Hair Salon 店內環境照片",
     className: "secondary",
   },
 ];

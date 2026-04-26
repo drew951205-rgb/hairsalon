@@ -28,13 +28,22 @@ export default async function handler(req, res) {
   }
 
   try {
-    await transporter.sendMail({
-      from: `VOV hair salon <${contactSender}>`,
-      to: contactRecipient,
-      replyTo: email,
-      subject: `VOV hair salon contact form: ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-    });
+    await Promise.all([
+      transporter.sendMail({
+        from: `VOV hair salon <${contactSender}>`,
+        to: contactRecipient,
+        replyTo: email,
+        subject: `VOV hair salon contact form: ${name}`,
+        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+      }),
+      transporter.sendMail({
+        from: `VOV hair salon <${contactSender}>`,
+        to: email,
+        replyTo: contactRecipient,
+        subject: "VOV Hair Salon 已收到您的訊息",
+        text: `${name} 您好：\n\n我們已收到您的訊息，會盡快與您聯繫。\n\n您留下的訊息：\n${message}\n\nVOV Hair Salon`,
+      }),
+    ]);
 
     return res.status(200).json({ status: "success" });
   } catch (error) {

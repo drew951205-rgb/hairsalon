@@ -197,7 +197,7 @@ const Footer = () => (
           </svg>
         </a>
         <a
-          href="https://line.me/"
+          href="https://line.me/R/ti/p/@ane1336b"
           target="_blank"
           rel="noopener noreferrer"
           className="footer-social-button line"
