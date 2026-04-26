@@ -394,7 +394,7 @@ html {
 .page-header-title,
 .page-header-lead {
   opacity: 0;
-  animation: title-fade-up 0.7s ease forwards;
+  animation: title-fade-in 0.45s ease forwards;
 }
 
 .page-header-lead {
