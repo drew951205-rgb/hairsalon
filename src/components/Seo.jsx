@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const siteUrl = "https://www.vovhairsalon.com";
+const siteUrl = "https://vovhairsalon.com";
 const defaultImage = `${siteUrl}/assets/logo.jpg`;
 
 const setMetaTag = (selector, attributes) => {
