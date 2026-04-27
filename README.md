@@ -1,35 +1,55 @@
-# 美髮沙龍網站
+# VOV Hair Salon
 
-這是一個專為美髮沙龍設計的響應式網站，根據需求規劃開發。
+VOV Hair Salon 的網站與內容管理專案，包含：
 
-## 功能特色
+- `src/`：React + Vite 前端網站
+- `api/`、`server.js`：聯絡表單 API
+- `vov-hair-salon/`：唯一有效的 Sanity Studio
 
-- **首頁**：品牌定位、熱門服務、顧客評價
-- **服務頁**：詳細服務資訊、價格、時長說明
-- **作品集**：分類展示作品，前後對比
-- **設計師介紹**：團隊成員專長、經驗
-- **線上預約**：完整的預約流程
-- **聯絡頁面**：店家資訊、交通指引
+## Sanity 架構
 
-## 技術架構
- **前端**：React 18 + Vite + React Router
-- **樣式**：Bootstrap 5 + CSS3
-- **內容管理**：Sanity CMS
-- **後端API**：Node.js Express / Vercel Functions
-- **部署**：Vercel
+這個 repo 現在只有一套有效的 Sanity 設定。
 
-## 使用說明
+- 單一設定來源：[`sanity.shared.js`](./sanity.shared.js)
+- 前端資料存取：[`src/lib/sanity.js`](./src/lib/sanity.js)
+- Sanity Studio：[`vov-hair-salon/sanity.config.ts`](./vov-hair-salon/sanity.config.ts)
+- Sanity CLI：[`vov-hair-salon/sanity.cli.ts`](./vov-hair-salon/sanity.cli.ts)
 
-1. 開啟 `index.html` 開始瀏覽
-2. 使用導航欄在各頁面間切換
-3. 在預約頁面填寫表單進行預約
+目前統一使用：
 
-## 注意事項
+- `projectId`: `txggw5j4`
+- `dataset`: `production`
+- `apiVersion`: `2025-01-01`
 
-- 圖片使用 placeholder.jpg 作為佔位符，實際部署時請替換為真實圖片
-- 預約功能目前為前端模擬，實際應用需連接後端系統
-- 網站已優化手機體驗
+如果本機還保留舊的 `VITE_SANITY_*` 環境變數，值只要和共享設定不一致，前端會直接報錯，避免誤連到錯的 Sanity 專案。
 
-## 開發者
+## 開發指令
 
-基於15年軟體開發經驗，專注於用戶體驗和商業價值實現。
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
+```
+
+Sanity Studio：
+
+```bash
+cd vov-hair-salon
+npm install
+npm run dev
+```
+
+## 環境變數
+
+Sanity 不再需要在 `.env.local` 另外配置 `VITE_SANITY_*`。
+
+仍然可能需要的本機變數：
+
+```env
+GMAIL_USER=your-email@gmail.com
+GMAIL_PASS=your-app-password
+CONTACT_EMAIL_RECIPIENT=your-email@example.com
+```
+
+範例可參考 [`.env.example`](./.env.example)。

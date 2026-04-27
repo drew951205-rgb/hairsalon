@@ -1,9 +1,10 @@
 import {defineCliConfig} from 'sanity/cli'
+import {SANITY_DATASET, SANITY_PROJECT_ID} from '../sanity.shared.js'
 
 export default defineCliConfig({
   api: {
-    projectId: 'txggw5j4',
-    dataset: 'production'
+    projectId: SANITY_PROJECT_ID,
+    dataset: SANITY_DATASET
   },
   deployment: {
     /**

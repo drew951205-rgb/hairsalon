@@ -8,7 +8,7 @@ const menuSections = [
   {
     title: "剪髮",
     subtitle: "Cut",
-    image: "/assets/cut.service.png",
+    image: "/assets/cut.service.optimized.jpg",
     imageAlt: "VOV Hair Salon 剪髮服務形象照",
     introPath: "/chiayi-haircut",
     introLabel: "查看更多",
@@ -28,7 +28,7 @@ const menuSections = [
   {
     title: "染髮",
     subtitle: "Color",
-    image: "/assets/color.service.png",
+    image: "/assets/color.service.optimized.jpg",
     imageAlt: "VOV Hair Salon 染髮服務形象照",
     introPath: "/chiayi-hair-color",
     introLabel: "查看更多",
@@ -48,7 +48,7 @@ const menuSections = [
   {
     title: "燙髮",
     subtitle: "Perm",
-    image: "/assets/perm.service.png",
+    image: "/assets/perm.service.optimized.jpg",
     imageAlt: "VOV Hair Salon 燙髮服務形象照",
     introPath: "/chiayi-perm",
     introLabel: "查看更多",
@@ -68,7 +68,7 @@ const menuSections = [
   {
     title: "頭皮養護",
     subtitle: "Scalp Spa",
-    image: "/assets/scalp.service.png",
+    image: "/assets/scalp.service.optimized.jpg",
     imageAlt: "VOV Hair Salon 頭皮養護服務形象照",
     introPath: "/chiayi-scalp-spa",
     introLabel: "查看更多",
@@ -130,7 +130,7 @@ const Services = () => {
       <PageHeader title="服務價目表" lead="Menu" />
       <div className="container">
         <div className="services-menu-list">
-          {menuSections.map((section) => (
+          {menuSections.map((section, index) => (
             <article className="services-menu-section" key={section.title}>
               <div className="services-menu-heading services-reveal">
                 <div>
@@ -143,7 +143,8 @@ const Services = () => {
                 <img
                   src={section.image}
                   alt={section.imageAlt}
-                  loading="lazy"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  fetchPriority={index === 0 ? "high" : "auto"}
                   decoding="async"
                 />
               </div>

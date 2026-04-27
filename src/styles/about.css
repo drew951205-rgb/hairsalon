@@ -54,7 +54,7 @@
 
 @media (min-width: 769px) {
   .about-top-image {
-    background-image: url("/assets/desktophero.jpg");
+    background-image: url("/assets/desktophero.optimized.webp");
     background-position: center;
     background-size: cover;
   }

@@ -1,6 +1,40 @@
-const projectId = import.meta.env.VITE_SANITY_PROJECT_ID;
-const dataset = import.meta.env.VITE_SANITY_DATASET || "production";
-const apiVersion = import.meta.env.VITE_SANITY_API_VERSION || "2025-01-01";
+import {
+  SANITY_API_VERSION,
+  SANITY_DATASET,
+  SANITY_PROJECT_ID,
+} from "../../sanity.shared.js";
+
+const legacyEnvProjectId = import.meta.env.VITE_SANITY_PROJECT_ID;
+const legacyEnvDataset = import.meta.env.VITE_SANITY_DATASET;
+const legacyEnvApiVersion = import.meta.env.VITE_SANITY_API_VERSION;
+
+const assertLegacyEnvMatchesSharedConfig = (name, currentValue, expectedValue) => {
+  if (currentValue && currentValue !== expectedValue) {
+    throw new Error(
+      `${name}="${currentValue}" does not match shared Sanity config "${expectedValue}". Remove the stale env value or update sanity.shared.js.`,
+    );
+  }
+};
+
+assertLegacyEnvMatchesSharedConfig(
+  "VITE_SANITY_PROJECT_ID",
+  legacyEnvProjectId,
+  SANITY_PROJECT_ID,
+);
+assertLegacyEnvMatchesSharedConfig(
+  "VITE_SANITY_DATASET",
+  legacyEnvDataset,
+  SANITY_DATASET,
+);
+assertLegacyEnvMatchesSharedConfig(
+  "VITE_SANITY_API_VERSION",
+  legacyEnvApiVersion,
+  SANITY_API_VERSION,
+);
+
+const projectId = SANITY_PROJECT_ID;
+const dataset = SANITY_DATASET;
+const apiVersion = SANITY_API_VERSION;
 
 const hasSanityConfig = Boolean(projectId && dataset);
 

@@ -29,7 +29,7 @@ const displayedStylists = [
     role: "經理/設計師",
     description:
       "擅長韓系燙髮、柔霧髮色與臉型修飾，依照每位客人的髮質與生活習慣設計好整理的髮型。",
-    image: "/assets/jenny.webp",
+    image: "/assets/jenny.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師 Jenny",
     alignment: "left",
   },
@@ -38,7 +38,7 @@ const displayedStylists = [
     role: "男士剪裁設計師",
     description:
       "專注男士剪髮、層次修剪與自然造型，打造乾淨俐落又適合日常整理的髮型。",
-    image: "/assets/niko.jpg",
+    image: "/assets/niko.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師 NIKO",
     alignment: "right",
   },
@@ -47,7 +47,7 @@ const displayedStylists = [
     role: "質感染燙設計師",
     description:
       "擅長自然捲度、霧感髮色與日常好整理的髮型規劃，重視溝通與整體風格比例。",
-    image: "/assets/chia.webp",
+    image: "/assets/chia.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師家嫻",
     alignment: "left",
   },
@@ -56,16 +56,16 @@ const displayedStylists = [
     role: "店長/設計師",
     description:
       "擅長依膚色與髮況設計髮色，搭配柔和線條修飾臉型，呈現自然有精神的造型。",
-    image: "/assets/jin.webp",
+    image: "/assets/jin.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師靖惠",
     alignment: "right",
   },
   {
-    name: "WINO",
+    name: "WENO",
     role: "造型設計師",
     description:
       "擅長依照臉型與個人風格打造俐落有型的剪裁，讓髮型自然好整理，也能展現個人特色。",
-    image: "/assets/wino.jpg",
+    image: "/assets/wino.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師 WINO",
     alignment: "left",
   },
@@ -74,7 +74,7 @@ const displayedStylists = [
     role: "頭皮SPA護理設計師",
     description:
       "具備頭皮護理專業知識與實務經驗，熟悉各類頭皮問題判斷與處理，能依據顧客需求提供客製化療程建議。擅長頭皮SPA按摩技術，結合產品應用與護理流程，提升頭皮健康與顧客舒適度，致力於打造長期穩定的頭皮保養方案。",
-    image: "/assets/tani.jpg",
+    image: "/assets/tani.optimized.webp",
     imageAlt: "VOV Hair Salon 設計師妲妮",
     alignment: "right",
   },
@@ -82,22 +82,22 @@ const displayedStylists = [
 
 const environmentImages = [
   {
-    image: "/assets/20546_0.jpg",
+    image: "/assets/20546_0.optimized.webp",
     imageAlt: "VOV Hair Salon 店內空間",
     className: "primary",
   },
   {
-    image: "/assets/20547_0.jpg",
+    image: "/assets/20547_0.optimized.webp",
     imageAlt: "VOV Hair Salon 沙龍形象",
     className: "secondary",
   },
   {
-    image: "/assets/20548_0.jpg",
+    image: "/assets/20548_0.optimized.webp",
     imageAlt: "VOV Hair Salon 店內環境照片",
     className: "primary",
   },
   {
-    image: "/assets/20549_0.jpg",
+    image: "/assets/20549_0.optimized.webp",
     imageAlt: "VOV Hair Salon 店內環境照片",
     className: "secondary",
   },
@@ -150,6 +150,9 @@ const Stylists = () => {
           src="/assets/first.webp"
           alt="VOV Hair Salon 店內形象"
           className="about-reveal is-visible"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
         />
       </section>
 
@@ -174,7 +177,8 @@ const Stylists = () => {
             </div>
             <div className="about-intro-copy about-reveal">
               <p className="about-intro-lead">
-                VOV Hair Salon 希望每位來到店裡的客人，都能在放鬆的節奏中找到更適合自己的樣子。
+                VOV Hair Salon
+                希望每位來到店裡的客人，都能在放鬆的節奏中找到更適合自己的樣子。
               </p>
               <div className="about-divider" aria-hidden="true" />
               <p>
@@ -218,7 +222,7 @@ const Stylists = () => {
           </div>
 
           <div className="about-team-list">
-            {displayedStylists.map((item) => (
+            {displayedStylists.map((item, index) => (
               <article
                 className={`about-team-card about-reveal ${item.alignment}`}
                 key={item.name}
@@ -227,7 +231,8 @@ const Stylists = () => {
                   <img
                     src={item.image}
                     alt={item.imageAlt}
-                    loading="lazy"
+                    loading={index < 2 ? "eager" : "lazy"}
+                    fetchPriority={index < 2 ? "high" : "auto"}
                     decoding="async"
                   />
                 </div>

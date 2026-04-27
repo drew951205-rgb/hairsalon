@@ -303,7 +303,7 @@ html {
   .hero {
     background-image:
       linear-gradient(180deg, rgba(13, 13, 14, 0.14), rgba(13, 13, 14, 0.04)),
-      url("/assets/desktophero.jpg");
+      url("/assets/desktophero.optimized.webp");
   }
 }
 
