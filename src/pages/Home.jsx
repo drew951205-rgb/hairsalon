@@ -35,7 +35,7 @@ const mapNewsItem = (item) => {
     }),
     imageAlt:
       item.imageAlt ||
-      `VOV Hair Salon ?儔撣?擃格??唳???- ${item.title || "最新消息"}`,
+      `VOV Hair Salon 最新消息 - ${item.title || "最新消息"}`,
   };
 };
 
@@ -61,7 +61,7 @@ const mapPortfolioItem = (item) => {
     }),
     imageAlt:
       item.imageAlt ||
-      `VOV Hair Salon ?儔撣?擃桐???- ${item.title || "作品"}`,
+      `VOV Hair Salon 作品集 - ${item.title || "作品"}`,
   };
 };
 
@@ -72,10 +72,10 @@ const mapTestimonialItem = (item) => {
 
   return {
     id: item._id,
-    name: item.name || "憿批恥",
+    name: item.name || "顧客",
     comment: item.comment || "",
     rating: Math.min(Math.max(Number(item.rating) || 5, 1), 5),
-    source: item.source || "摰Ｘ閰",
+    source: item.source || "店內回饋",
   };
 };
 
@@ -197,10 +197,10 @@ const Home = () => {
   const [customerTestimonials, setCustomerTestimonials] = useState(
     testimonials.map((comment, index) => ({
       id: `fallback-${index}`,
-      name: "憿批恥",
+      name: "顧客",
       comment,
       rating: 5,
-      source: "摰Ｘ閰",
+      source: "店內回饋",
     })),
   );
 
@@ -408,7 +408,7 @@ const Home = () => {
                             <p className="card-text mb-1">{item.subtitle}</p>
                             {item.stylist ? (
                               <p className="mb-0 text-muted">
-                                閮剛?撣恬?{item.stylist}
+                                設計師：{item.stylist}
                               </p>
                             ) : null}
                           </div>
@@ -539,7 +539,7 @@ const Home = () => {
             <h2 className="display-6 fw-bold section-line-title">客戶回響</h2>
             <p className="section-subtitle-en mb-0">Customer Reviews</p>
           </div>
-          <div className="testimonial-marquee home-reveal" aria-label="摰Ｘ閰頛芣">
+          <div className="testimonial-marquee home-reveal" aria-label="客戶評價列表">
             <div className="testimonial-marquee-track">
               {customerTestimonials.map(renderTestimonialCard)}
               {customerTestimonials.map(renderTestimonialCard)}
