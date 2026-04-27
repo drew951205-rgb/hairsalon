@@ -37,6 +37,7 @@ const ServiceSeoPage = ({ config }) => {
     config.portfolioCategory,
   )}`;
   const trustTags = config.trustTags || defaultTrustTags;
+  const priceItems = config.priceItems || [];
 
   useEffect(() => {
     let isMounted = true;
@@ -100,6 +101,19 @@ const ServiceSeoPage = ({ config }) => {
             <p className="eyebrow text-muted mb-2">Price</p>
             <h2>{config.priceTitle}</h2>
             <p className="seo-price">{config.price}</p>
+            {priceItems.length ? (
+              <div className="seo-price-list" aria-label={`${config.shortName}價格明細`}>
+                {priceItems.map((item) => (
+                  <div className="seo-price-row" key={item.name}>
+                    <div>
+                      <h3>{item.name}</h3>
+                      {item.note ? <p>{item.note}</p> : null}
+                    </div>
+                    <strong>{item.price}</strong>
+                  </div>
+                ))}
+              </div>
+            ) : null}
             <p className="text-muted mb-0">{config.priceNote}</p>
           </div>
         </div>

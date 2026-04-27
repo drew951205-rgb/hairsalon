@@ -7,6 +7,18 @@ const config = {
   lead: "VOV Hair Salon 提供嘉義燙髮服務，依照髮況、臉型與想要的捲度，規劃自然好整理的燙髮造型。",
   priceTitle: "燙髮價格",
   price: "NT$2000 起",
+  priceItems: [
+    {
+      name: "女神燙髮",
+      note: "創造自然捲度、蓬鬆感與柔和線條",
+      price: "NT$3000 起",
+    },
+    {
+      name: "男士燙髮",
+      note: "適合男士蓬鬆、紋理與日常整理造型",
+      price: "NT$2000 起",
+    },
+  ],
   priceNote: "價格會依髮長、髮量、燙髮設計與護理需求調整，建議先諮詢。",
   portfolioCategory: "燙髮作品",
   trustTags: ["髮況評估", "自然捲度", "燙後整理建議"],

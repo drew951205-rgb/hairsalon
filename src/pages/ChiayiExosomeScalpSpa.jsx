@@ -6,7 +6,14 @@ const config = {
   title: "嘉義高壓氧外泌體毛囊再生頭皮SPA推薦",
   lead: "針對頭皮敏弱、落髮困擾、髮根扁塌與頭皮循環需求，透過高壓氧導入與外泌體護理，協助深層修護頭皮狀態。",
   priceTitle: "高壓氧外泌體毛囊再生頭皮SPA價格",
-  price: "NT$3000 起",
+  price: "NT$6000 起",
+  priceItems: [
+    {
+      name: "高壓氧外泌體毛囊再生頭皮SPA",
+      note: "針對頭皮狀態深層修護",
+      price: "NT$6000 起",
+    },
+  ],
   priceNote: "實際價格會依頭皮狀況、護理內容與現場評估調整。",
   portfolioCategory: "頭皮護理作品",
   trustTags: ["頭皮檢視", "深層修護", "毛囊養護"],

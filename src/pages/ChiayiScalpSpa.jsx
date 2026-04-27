@@ -6,7 +6,14 @@ const config = {
   title: "嘉義綜效頭皮SPA含洗推薦",
   lead: "結合頭皮清潔、舒緩按摩與洗護流程，適合想放鬆、改善頭皮悶黏感，並讓髮絲恢復清爽蓬鬆的顧客。",
   priceTitle: "綜效頭皮SPA含洗價格",
-  price: "NT$1600 起",
+  price: "NT$1200 起",
+  priceItems: [
+    {
+      name: "絲馭光頭皮SPA護理含洗",
+      note: "深層清潔頭皮，舒緩悶黏與出油感",
+      price: "NT$1200 起",
+    },
+  ],
   priceNote: "含洗護流程，實際內容會依頭皮狀況與現場評估調整。",
   portfolioCategory: "頭皮護理作品",
   trustTags: ["深層清潔", "舒緩放鬆", "含洗護流程"],

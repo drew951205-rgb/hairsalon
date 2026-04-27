@@ -7,6 +7,18 @@ const config = {
   lead: "VOV Hair Salon 提供嘉義染髮服務，依照膚色、髮況與風格需求，設計自然耐看的質感髮色。",
   priceTitle: "染髮價格",
   price: "NT$1500 起",
+  priceItems: [
+    {
+      name: "女神染髮",
+      note: "依髮長、髮量與設計需求調整",
+      price: "NT$2000 起",
+    },
+    {
+      name: "男士染髮",
+      note: "適合男士質感髮色與自然修飾",
+      price: "NT$1500 起",
+    },
+  ],
   priceNote: "價格會依髮長、髮量、漂髮需求與護理內容調整，建議現場諮詢。",
   portfolioCategory: "染髮作品",
   trustTags: ["膚色分析", "質感髮色", "染後護理建議"],

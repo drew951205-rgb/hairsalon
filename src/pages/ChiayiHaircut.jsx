@@ -6,8 +6,20 @@ const config = {
   title: "嘉義剪髮推薦，洗剪特惠套餐",
   lead: "VOV Hair Salon 提供嘉義專業剪髮服務，依照臉型、髮流、髮量與日常整理習慣，設計適合你的髮型輪廓。",
   priceTitle: "剪髮價格",
-  price: "NT$800 起",
-  priceNote: "包含洗髮、剪髮與基礎整理，實際內容依現場服務為準。",
+  price: "NT$500 起",
+  priceItems: [
+    {
+      name: "洗剪套餐",
+      note: "含洗髮、剪髮與基礎整理",
+      price: "NT$700 起",
+    },
+    {
+      name: "洗剪學生套餐",
+      note: "含洗髮、剪髮與基礎整理",
+      price: "NT$500 起",
+    },
+  ],
+  priceNote: "實際價格與細節依現場服務內容為準。",
   portfolioCategory: "剪髮作品",
   trustTags: ["臉型修飾", "髮流評估", "好整理髮型"],
   audience: [
