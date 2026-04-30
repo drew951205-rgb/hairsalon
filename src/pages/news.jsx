@@ -129,6 +129,8 @@ const News = () => {
                             sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
                             alt={imageAlt}
                             className="card-img-top portfolio-card-image"
+                            width="900"
+                            height="380"
                             loading="lazy"
                             decoding="async"
                           />

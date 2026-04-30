@@ -456,6 +456,8 @@ const Portfolio = () => {
                               sizes="(max-width: 767px) 100vw, 50vw"
                               alt={imageAlt}
                               className="card-img-top portfolio-card-image"
+                              width="900"
+                              height="380"
                               loading="lazy"
                               decoding="async"
                             />

@@ -231,6 +231,8 @@ const Stylists = () => {
                   <img
                     src={item.image}
                     alt={item.imageAlt}
+                    width="700"
+                    height="900"
                     loading={index < 2 ? "eager" : "lazy"}
                     fetchPriority={index < 2 ? "high" : "auto"}
                     decoding="async"
@@ -258,6 +260,8 @@ const Stylists = () => {
                 <img
                   src={item.image}
                   alt={item.imageAlt}
+                  width="1200"
+                  height="900"
                   loading="lazy"
                   decoding="async"
                 />

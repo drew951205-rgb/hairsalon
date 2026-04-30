@@ -143,6 +143,8 @@ const Services = () => {
                 <img
                   src={section.image}
                   alt={section.imageAlt}
+                  width="1200"
+                  height="800"
                   loading={index === 0 ? "eager" : "lazy"}
                   fetchPriority={index === 0 ? "high" : "auto"}
                   decoding="async"

@@ -16,6 +16,14 @@
   box-sizing: border-box;
 }
 
+img,
+picture,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 body {
   margin: 0;
   font-family: "Noto Sans TC", sans-serif;

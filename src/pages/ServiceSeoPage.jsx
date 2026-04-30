@@ -143,6 +143,8 @@ const ServiceSeoPage = ({ config }) => {
                       sizes="(max-width: 767px) 100vw, 33vw"
                       alt={item.imageAlt}
                       className="seo-portfolio-photo"
+                      width="800"
+                      height="1000"
                       loading="lazy"
                       decoding="async"
                     />

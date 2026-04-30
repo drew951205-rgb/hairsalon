@@ -226,6 +226,8 @@ const NewsDetail = () => {
                     sizes="(max-width: 767px) 100vw, 860px"
                     alt={image.imageAlt}
                     className="news-detail-image"
+                    width="1200"
+                    height="800"
                     loading={index === 0 ? "eager" : "lazy"}
                     fetchPriority={index === 0 ? "high" : "auto"}
                     decoding="async"

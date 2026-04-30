@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -9,21 +7,27 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Services from "./pages/Services";
-import Portfolio from "./pages/Portfolio";
-import Stylists from "./pages/Stylists";
-import Booking from "./pages/Booking";
-import Contact from "./pages/Contact";
-import News from "./pages/news";
-import NewsDetail from "./pages/NewsDetail";
-import ChiayiHaircut from "./pages/ChiayiHaircut";
-import ChiayiPerm from "./pages/ChiayiPerm";
-import ChiayiHairColor from "./pages/ChiayiHairColor";
-import ChiayiExosomeScalpSpa from "./pages/ChiayiExosomeScalpSpa";
-import ChiayiScalpSpa from "./pages/ChiayiScalpSpa";
-import Seo from "./components/Seo";
-import ErrorBoundary from "./components/ErrorBoundary";
+const Home = lazy(() => import("./pages/Home"));
+const Services = lazy(() => import("./pages/Services"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const Stylists = lazy(() => import("./pages/Stylists"));
+const Booking = lazy(() => import("./pages/Booking"));
+const Contact = lazy(() => import("./pages/Contact"));
+const News = lazy(() => import("./pages/news"));
+const NewsDetail = lazy(() => import("./pages/NewsDetail"));
+const ChiayiHaircut = lazy(() => import("./pages/ChiayiHaircut"));
+const ChiayiPerm = lazy(() => import("./pages/ChiayiPerm"));
+const ChiayiHairColor = lazy(() => import("./pages/ChiayiHairColor"));
+const ChiayiExosomeScalpSpa = lazy(() => import("./pages/ChiayiExosomeScalpSpa"));
+const ChiayiScalpSpa = lazy(() => import("./pages/ChiayiScalpSpa"));
+const Seo = lazy(() => import("./components/Seo"));
+const ErrorBoundary = lazy(() => import("./components/ErrorBoundary"));
+const Analytics = lazy(() =>
+  import("@vercel/analytics/react").then((module) => ({ default: module.Analytics }))
+);
+const SpeedInsights = lazy(() =>
+  import("@vercel/speed-insights/react").then((module) => ({ default: module.SpeedInsights }))
+);
 import { navItems } from "./data";
 
 const ScrollToTop = () => {
@@ -261,13 +265,14 @@ const AppShell = () => {
           </div>
         </div>
       ) : null}
-      <Seo
-        title={seo.title}
-        description={seo.description}
-        path={location.pathname}
-      />
+      <Suspense fallback={<div className="page-loading" aria-live="polite">載入中...</div>}>
+        <Seo
+          title={seo.title}
+          description={seo.description}
+          path={location.pathname}
+        />
 
-      <header className="site-header py-3 shadow-sm bg-white">
+        <header className="site-header py-3 shadow-sm bg-white">
         <div className="container site-header-row">
           <Link
             to="/"
@@ -302,6 +307,7 @@ const AppShell = () => {
           </div>
         </div>
       </header>
+      </Suspense>
 
       {isMenuOpen ? (
         <button
@@ -313,27 +319,29 @@ const AppShell = () => {
       ) : null}
 
       <main>
-        <ErrorBoundary resetKey={location.pathname}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/news/:slug" element={<NewsDetail />} />
-            <Route path="/chiayi-haircut" element={<ChiayiHaircut />} />
-            <Route path="/chiayi-perm" element={<ChiayiPerm />} />
-            <Route path="/chiayi-hair-color" element={<ChiayiHairColor />} />
-            <Route
-              path="/chiayi-exosome-scalp-spa"
-              element={<ChiayiExosomeScalpSpa />}
-            />
-            <Route path="/chiayi-scalp-spa" element={<ChiayiScalpSpa />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/stylists" element={<Stylists />} />
-            <Route path="/about" element={<Stylists />} />
-            <Route path="/booking" element={<Booking />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </ErrorBoundary>
+        <Suspense fallback={<div className="page-loading" aria-live="polite">載入中...</div>}>
+          <ErrorBoundary resetKey={location.pathname}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:slug" element={<NewsDetail />} />
+              <Route path="/chiayi-haircut" element={<ChiayiHaircut />} />
+              <Route path="/chiayi-perm" element={<ChiayiPerm />} />
+              <Route path="/chiayi-hair-color" element={<ChiayiHairColor />} />
+              <Route
+                path="/chiayi-exosome-scalp-spa"
+                element={<ChiayiExosomeScalpSpa />}
+              />
+              <Route path="/chiayi-scalp-spa" element={<ChiayiScalpSpa />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/stylists" element={<Stylists />} />
+              <Route path="/about" element={<Stylists />} />
+              <Route path="/booking" element={<Booking />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </ErrorBoundary>
+        </Suspense>
       </main>
 
       {!isBookingPage && <Footer />}
@@ -345,8 +353,10 @@ const App = () => (
   <BrowserRouter>
     <ScrollToTop />
     <AppShell />
-    <Analytics />
-    <SpeedInsights />
+    <Suspense fallback={null}>
+      <Analytics />
+      <SpeedInsights />
+    </Suspense>
   </BrowserRouter>
 );
 

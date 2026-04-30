@@ -395,8 +395,8 @@ const Home = () => {
                               srcSet={item.imageSrcSet}
                               sizes="(max-width: 767px) 100vw, 33vw"
                               alt={item.imageAlt}
-                              className="home-portfolio-photo"
-                              loading="lazy"
+                              className="home-portfolio-photo"                            width="800"
+                            height="1000"                              loading="lazy"
                               decoding="async"
                             />
                           ) : null}
