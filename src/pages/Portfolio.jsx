@@ -456,8 +456,8 @@ const Portfolio = () => {
                               sizes="(max-width: 767px) 100vw, 50vw"
                               alt={imageAlt}
                               className="card-img-top portfolio-card-image"
-                              width="900"
-                              height="380"
+                              width="1000"
+                              height="1250"
                               loading="lazy"
                               decoding="async"
                             />
@@ -550,6 +550,8 @@ const Portfolio = () => {
                     className={`portfolio-lightbox-image${
                       loadedLightboxImages[item.id] ? " is-loaded" : ""
                     }`}
+                    width="1400"
+                    height="1750"
                     loading={index === activeImageIndex ? "eager" : "lazy"}
                     fetchPriority={index === activeImageIndex ? "high" : "auto"}
                     decoding="async"
@@ -565,7 +567,7 @@ const Portfolio = () => {
                     <div className="portfolio-lightbox-loading" aria-hidden="true">
                       <div className="loading-scissor-line">
                         <span />
-                        <img src="/assets/scissors.png" alt="" />
+                        <img src="/assets/scissors.png" alt="" width="512" height="512" />
                       </div>
                       <p>照片載入中</p>
                     </div>

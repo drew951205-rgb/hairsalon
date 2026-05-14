@@ -93,7 +93,7 @@ const News = () => {
       <PageHeader title="最新消息" lead="News" />
       <div className="scissor-divider" aria-hidden="true">
         <span />
-        <img src="/assets/scissors.png" alt="" />
+        <img src="/assets/scissors.png" alt="" width="512" height="512" />
       </div>
       <div className="container">
         {isLoading ? (
@@ -130,7 +130,7 @@ const News = () => {
                             alt={imageAlt}
                             className="card-img-top portfolio-card-image"
                             width="900"
-                            height="380"
+                            height="1125"
                             loading="lazy"
                             decoding="async"
                           />
@@ -211,6 +211,8 @@ const News = () => {
               src={activeItem.imagePath}
               alt={activeItem.imageAlt || getNewsImageAlt(activeItem)}
               className="portfolio-lightbox-image"
+              width="1400"
+              height="1750"
               decoding="async"
             />
             <div className="portfolio-lightbox-caption">

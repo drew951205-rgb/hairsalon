@@ -3,7 +3,7 @@ const LoadingState = ({ label = "資料載入中" }) => (
     <p>{label}</p>
     <div className="loading-scissor-line" aria-hidden="true">
       <span />
-      <img src="/assets/scissors.png" alt="" />
+      <img src="/assets/scissors.png" alt="" width="512" height="512" />
     </div>
   </div>
 );

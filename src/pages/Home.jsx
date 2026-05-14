@@ -119,7 +119,7 @@ const renderServiceIcon = (index) => {
       {icon.type === "icon" ? (
         <Icon name={icon.value} />
       ) : (
-        <img src={icon.value} alt={icon.alt} />
+        <img src={icon.value} alt={icon.alt} width="512" height="512" />
       )}
     </div>
   );
@@ -395,8 +395,10 @@ const Home = () => {
                               srcSet={item.imageSrcSet}
                               sizes="(max-width: 767px) 100vw, 33vw"
                               alt={item.imageAlt}
-                              className="home-portfolio-photo"                            width="800"
-                            height="1000"                              loading="lazy"
+                              className="home-portfolio-photo"
+                              width="1000"
+                              height="1250"
+                              loading="lazy"
                               decoding="async"
                             />
                           ) : null}
@@ -488,6 +490,8 @@ const Home = () => {
                               sizes="(max-width: 767px) 100vw, 50vw"
                               alt={item.imageAlt}
                               className="home-preview-image"
+                              width="900"
+                              height="600"
                               loading="lazy"
                               decoding="async"
                             />

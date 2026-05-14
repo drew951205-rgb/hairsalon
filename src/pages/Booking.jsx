@@ -28,7 +28,7 @@ const Booking = () => {
           <p>預約系統載入中</p>
           <div className="loading-scissor-line" aria-hidden="true">
             <span />
-            <img src="/assets/scissors.png" alt="" />
+            <img src="/assets/scissors.png" alt="" width="512" height="512" />
           </div>
         </div>
       ) : null}

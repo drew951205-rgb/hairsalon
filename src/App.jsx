@@ -40,6 +40,25 @@ const ScrollToTop = () => {
   return null;
 };
 
+const getSpeedInsightsRoute = (pathname) => {
+  if (pathname.startsWith("/news/")) {
+    return "/news/[slug]";
+  }
+
+  return pathname === "/about" ? "/stylists" : pathname;
+};
+
+const Observability = () => {
+  const { pathname } = useLocation();
+
+  return (
+    <>
+      <Analytics />
+      <SpeedInsights route={getSpeedInsightsRoute(pathname)} />
+    </>
+  );
+};
+
 const seoByPath = {
   "/": {
     title: "VOV Hair Salon | 嘉義市專業剪髮、染燙、頭皮養護推薦",
@@ -255,12 +274,14 @@ const AppShell = () => {
               src="/assets/logo.jpg"
               alt="VOV Hair Salon Logo"
               className="site-splash-logo"
+              width="960"
+              height="960"
             />
             <p className="site-splash-kicker">VOV hair salon</p>
             <h2>正在為你整理美好髮型</h2>
             <div className="loading-scissor-line" aria-hidden="true">
               <span />
-              <img src="/assets/scissors.png" alt="" />
+              <img src="/assets/scissors.png" alt="" width="512" height="512" />
             </div>
           </div>
         </div>
@@ -283,6 +304,8 @@ const AppShell = () => {
               src="/assets/logo.jpg"
               alt="VOV Hair Salon 嘉義市美髮沙龍 Logo"
               className="site-logo"
+              width="960"
+              height="960"
             />
             <div>
               <h1 className="site-brand-title mb-0">VOV hair salon</h1>
@@ -354,8 +377,7 @@ const App = () => (
     <ScrollToTop />
     <AppShell />
     <Suspense fallback={null}>
-      <Analytics />
-      <SpeedInsights />
+      <Observability />
     </Suspense>
   </BrowserRouter>
 );
