@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 const siteUrl = "https://www.vovhairsalon.com";
-const defaultImage = `${siteUrl}/assets/logo.jpg`;
+const defaultImage = `${siteUrl}/assets/og-vov-hair-salon.jpg`;
 
 const setMetaTag = (selector, attributes) => {
   let element = document.head.querySelector(selector);
@@ -16,6 +16,14 @@ const setMetaTag = (selector, attributes) => {
   });
 };
 
+const removeMetaTag = (selector) => {
+  const element = document.head.querySelector(selector);
+
+  if (element) {
+    element.remove();
+  }
+};
+
 const setCanonical = (href) => {
   let element = document.head.querySelector('link[rel="canonical"]');
 
@@ -28,7 +36,13 @@ const setCanonical = (href) => {
   element.setAttribute("href", href);
 };
 
-const Seo = ({ title, description, path = "/", image = defaultImage }) => {
+const Seo = ({
+  title,
+  description,
+  path = "/",
+  image = defaultImage,
+  noindex = false,
+}) => {
   useEffect(() => {
     const canonicalUrl = `${siteUrl}${path}`;
 
@@ -58,7 +72,20 @@ const Seo = ({ title, description, path = "/", image = defaultImage }) => {
       name: "twitter:card",
       content: "summary_large_image",
     });
-  }, [description, image, path, title]);
+    setMetaTag('meta[name="twitter:image"]', {
+      name: "twitter:image",
+      content: image,
+    });
+
+    if (noindex) {
+      setMetaTag('meta[name="robots"]', {
+        name: "robots",
+        content: "noindex, follow",
+      });
+    } else {
+      removeMetaTag('meta[name="robots"]');
+    }
+  }, [description, image, noindex, path, title]);
 
   return null;
 };

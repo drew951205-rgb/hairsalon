@@ -15,6 +15,7 @@ const Booking = lazy(() => import("./pages/Booking"));
 const Contact = lazy(() => import("./pages/Contact"));
 const News = lazy(() => import("./pages/news"));
 const NewsDetail = lazy(() => import("./pages/NewsDetail"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 const ChiayiHaircut = lazy(() => import("./pages/ChiayiHaircut"));
 const ChiayiPerm = lazy(() => import("./pages/ChiayiPerm"));
 const ChiayiHairColor = lazy(() => import("./pages/ChiayiHairColor"));
@@ -125,6 +126,12 @@ const seoByPath = {
     description:
       "VOV Hair Salon 嘉義綜效頭皮SPA含洗，結合頭皮清潔、舒緩按摩與洗護流程，適合想改善出油悶黏與放鬆紓壓的顧客。",
   },
+};
+
+const notFoundSeo = {
+  title: "找不到頁面 | VOV Hair Salon",
+  description:
+    "你造訪的 VOV Hair Salon 頁面不存在，請回到首頁、查看服務項目或使用線上預約。",
 };
 
 const Nav = ({ onNavigate }) => (
@@ -249,9 +256,10 @@ const AppShell = () => {
   const location = useLocation();
   const isBookingPage = location.pathname === "/booking";
   const seoPath = location.pathname === "/about" ? "/stylists" : location.pathname;
+  const hasSeoRoute = seoPath.startsWith("/news/") || Boolean(seoByPath[seoPath]);
   const seo = seoPath.startsWith("/news/")
     ? seoByPath["/news-detail"]
-    : seoByPath[seoPath] || seoByPath["/"];
+    : seoByPath[seoPath] || notFoundSeo;
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
@@ -291,6 +299,7 @@ const AppShell = () => {
           title={seo.title}
           description={seo.description}
           path={location.pathname}
+          noindex={!hasSeoRoute}
         />
 
         <header className="site-header py-3 shadow-sm bg-white">
@@ -308,7 +317,7 @@ const AppShell = () => {
               height="960"
             />
             <div>
-              <h1 className="site-brand-title mb-0">VOV hair salon</h1>
+              <p className="site-brand-title mb-0">VOV hair salon</p>
               <p className="text-muted small mb-1">嘉義市東區燙染專家</p>
             </div>
           </Link>
@@ -362,6 +371,7 @@ const AppShell = () => {
               <Route path="/about" element={<Stylists />} />
               <Route path="/booking" element={<Booking />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </ErrorBoundary>
         </Suspense>
