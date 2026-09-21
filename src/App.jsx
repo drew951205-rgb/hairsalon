@@ -23,6 +23,9 @@ const ChiayiExosomeScalpSpa = lazy(() => import("./pages/ChiayiExosomeScalpSpa")
 const ChiayiScalpSpa = lazy(() => import("./pages/ChiayiScalpSpa"));
 const Seo = lazy(() => import("./components/Seo"));
 const ErrorBoundary = lazy(() => import("./components/ErrorBoundary"));
+const GoogleAdsConversionTracking = lazy(() =>
+  import("./components/GoogleAdsConversionTracking")
+);
 const Analytics = lazy(() =>
   import("@vercel/analytics/react").then((module) => ({ default: module.Analytics }))
 );
@@ -387,6 +390,7 @@ const App = () => (
     <ScrollToTop />
     <AppShell />
     <Suspense fallback={null}>
+      <GoogleAdsConversionTracking />
       <Observability />
     </Suspense>
   </BrowserRouter>

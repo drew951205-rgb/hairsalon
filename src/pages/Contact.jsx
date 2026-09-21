@@ -72,7 +72,8 @@ const Contact = () => {
                   </a>
                 </p>
                 <p>
-                  <strong>電話：</strong>05-2779658
+                  <strong>電話：</strong>
+                  <a href="tel:052779658">05-2779658</a>
                 </p>
                 <p>
                   <strong>社群：</strong>
