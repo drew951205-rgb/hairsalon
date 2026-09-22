@@ -1993,6 +1993,51 @@ section h3 {
   display: none;
 }
 
+.portfolio-carousel-arrow {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .portfolio-carousel-shell {
+    padding-inline: 56px;
+  }
+
+  .portfolio-carousel-arrow {
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid #cbb49f;
+    border-radius: 50%;
+    background: #fffaf5;
+    color: #725640;
+    font-size: 22px;
+    line-height: 1;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+  }
+
+  .portfolio-carousel-arrow.previous { left: 0; }
+  .portfolio-carousel-arrow.next { right: 0; }
+
+  .portfolio-carousel-arrow:hover:not(:disabled) {
+    background: #f1e5d9;
+  }
+
+  .portfolio-carousel-arrow:focus-visible {
+    outline: 2px solid #725640;
+    outline-offset: 3px;
+  }
+
+  .portfolio-carousel-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
 .portfolio-carousel-item {
   flex: 0 0 min(420px, 78vw);
   scroll-snap-align: start;

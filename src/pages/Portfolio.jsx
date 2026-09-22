@@ -164,6 +164,7 @@ const Portfolio = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [loadedLightboxImages, setLoadedLightboxImages] = useState({});
   const [activeGroupIndexes, setActiveGroupIndexes] = useState({});
+  const [groupScrollEdges, setGroupScrollEdges] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const lightboxTrackRef = useRef(null);
   const portfolioTrackRefs = useRef({});
@@ -330,6 +331,14 @@ const Portfolio = () => {
     activeLightboxImages.slice(1).forEach(preloadPortfolioImage);
   }, [activeItem, activeLightboxImages]);
 
+  useEffect(() => {
+    const observer = new ResizeObserver(() => {
+      visiblePortfolioGroups.forEach((group) => syncPortfolioGroupIndex(group.category));
+    });
+    Object.values(portfolioTrackRefs.current).forEach((track) => observer.observe(track));
+    return () => observer.disconnect();
+  }, [visiblePortfolioGroups, isLoading]);
+
   const syncPortfolioGroupIndex = (category) => {
     const track = portfolioTrackRefs.current[category];
 
@@ -337,12 +346,34 @@ const Portfolio = () => {
       return;
     }
 
-    const nextIndex = Math.round(track.scrollLeft / track.clientWidth);
+    const step = track.children[1]
+      ? track.children[1].offsetLeft - track.children[0].offsetLeft
+      : track.clientWidth;
+    const nextIndex = Math.round(track.scrollLeft / step);
+    setGroupScrollEdges((edges) => ({
+      ...edges,
+      [category]: {
+        start: track.scrollLeft <= 1,
+        end: track.scrollLeft + track.clientWidth >= track.scrollWidth - 1,
+      },
+    }));
 
     setActiveGroupIndexes((currentIndexes) => ({
       ...currentIndexes,
       [category]: nextIndex,
     }));
+  };
+
+  const scrollPortfolioGroup = (category, direction) => {
+    const track = portfolioTrackRefs.current[category];
+    if (!track || track.children.length < 2) return;
+    const step = track.children[1].offsetLeft - track.children[0].offsetLeft;
+    track.scrollBy({
+      left: direction * step,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "instant"
+        : "smooth",
+    });
   };
 
   const syncLightboxIndex = () => {
@@ -481,6 +512,24 @@ const Portfolio = () => {
                 </div>
                 {group.items.length > 1 ? (
                   <>
+                    <button
+                      type="button"
+                      className="portfolio-carousel-arrow previous"
+                      aria-label={`${group.category}：上一張作品`}
+                      disabled={groupScrollEdges[group.category]?.start ?? true}
+                      onClick={() => scrollPortfolioGroup(group.category, -1)}
+                    >
+                      <span aria-hidden="true">‹</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="portfolio-carousel-arrow next"
+                      aria-label={`${group.category}：下一張作品`}
+                      disabled={groupScrollEdges[group.category]?.end ?? true}
+                      onClick={() => scrollPortfolioGroup(group.category, 1)}
+                    >
+                      <span aria-hidden="true">›</span>
+                    </button>
                     <div className="home-carousel-count portfolio-carousel-count">
                       {(activeGroupIndexes[group.category] || 0) + 1} /{" "}
                       {group.items.length}

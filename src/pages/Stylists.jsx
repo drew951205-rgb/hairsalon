@@ -76,7 +76,7 @@ const displayedStylists = [
       "以質感系設計風格，打造氣質優雅、帶有貴氣的燙染造型。透過細膩溝通與貼心照顧，讓每位客人都能感受到親切、有溫度的服務，找到屬於自己的迷人風格。",
     image: "/assets/Mue.jpg",
     imageAlt: "VOV Hair Salon 設計師 Mue",
-    alignment: "left",
+    alignment: "right",
   },
 ];
 
