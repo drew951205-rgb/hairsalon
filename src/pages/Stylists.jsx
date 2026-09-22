@@ -70,15 +70,6 @@ const displayedStylists = [
     alignment: "left",
   },
   {
-    name: "妲妮",
-    role: "頭皮SPA護理設計師",
-    description:
-      "具備頭皮護理專業知識與實務經驗，熟悉各類頭皮問題判斷與處理，能依據顧客需求提供客製化療程建議。擅長頭皮SPA按摩技術，結合產品應用與護理流程，提升頭皮健康與顧客舒適度，致力於打造長期穩定的頭皮保養方案。",
-    image: "/assets/tani.optimized.webp",
-    imageAlt: "VOV Hair Salon 設計師妲妮",
-    alignment: "right",
-  },
-  {
     name: "Mue",
     role: "質感系燙染設計師",
     description:
