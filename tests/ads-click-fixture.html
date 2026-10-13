@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VOV 轉換事件本地測試</title>
+    <style>
+      body { max-width: 900px; margin: 32px auto; padding: 0 20px; font: 16px/1.6 system-ui, sans-serif; color: #222; }
+      button, a { margin: 6px; padding: 10px 14px; }
+      button { cursor: pointer; }
+      #fixture-root { display: flex; flex-wrap: wrap; gap: 8px; padding: 18px; background: #f4f4f4; }
+      #fixture-root a { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid #888; border-radius: 6px; }
+      #metrics { padding: 12px; background: #e8f0fb; }
+      #log { white-space: pre-wrap; overflow-wrap: anywhere; padding: 14px; background: #f7f7f7; min-height: 120px; }
+    </style>
+  </head>
+  <body>
+    <h1>VOV 轉換事件本地測試</h1>
+    <p>只匯入實際追蹤 helper，沒有載入 Google 標籤。所有 gtag 呼叫由本頁 stub 接收，不會送出真實轉換。</p>
+    <div aria-label="測試控制">
+      <button id="stub-on">啟用 gtag stub</button>
+      <button id="stub-off">移除 gtag</button>
+      <button id="stub-throw">讓 gtag 拋錯</button>
+      <button id="reinstall">重複掛載兩次</button>
+      <button id="reset">重設測試</button>
+      <button id="booking">測試預約頁到達</button>
+    </div>
+    <p id="status" role="status">準備中</p>
+    <p id="metrics">已送入 stub：0；連結點擊：0；helper 阻止預設行為：0</p>
+    <div id="fixture-root" aria-label="追蹤測試連結">
+      <a href="https://line.me/R/ti/p/@ane1336b" target="_blank" rel="noopener noreferrer">LINE 一般連結</a>
+      <a href="https://maps.app.goo.gl/ypkRCadnrvm7Yyq77" target="_blank" rel="noopener noreferrer">VOV 地圖連結</a>
+      <a href="https://line.me/R/ti/p/@ane1336b" target="_blank" rel="noopener noreferrer">
+        <svg role="img" aria-label="LINE 內嵌 SVG 圖示" width="44" height="44" viewBox="0 0 24 24">
+          <g><path fill="#16833b" d="M3 3h18v18H3z" /></g>
+        </svg>
+        LINE 巢狀 SVG 連結
+      </a>
+      <a href="https://evil.example/?next=https://line.me/R/ti/p/@ane1336b" target="_blank" rel="noopener noreferrer">非目標連結（網址含 LINE 字樣）</a>
+    </div>
+    <p>測試頁會在 helper 執行之後攔住外連，避免真的開啟 LINE 或地圖。指標記錄攔截前的 defaultPrevented 狀態，可確認 helper 本身沒有阻止跳轉。</p>
+    <h2>呼叫與點擊紀錄</h2>
+    <pre id="log" aria-live="polite">尚無紀錄</pre>
+    <script type="module">
+      import { installAdsClickTracking, sendBookingPageConversion } from "../src/lib/googleAdsConversions.js";
+
+      const root = document.getElementById("fixture-root");
+      const status = document.getElementById("status");
+      const metrics = document.getElementById("metrics");
+      const log = document.getElementById("log");
+      let cleanup = installAdsClickTracking(root);
+      let calls = [];
+      let messages = [];
+      let clicks = 0;
+      let prevented = 0;
+
+      const render = () => {
+        metrics.textContent = `已送入 stub：${calls.length}；連結點擊：${clicks}；helper 阻止預設行為：${prevented}`;
+        log.textContent = messages.length ? messages.join("\n") : "尚無紀錄";
+      };
+      const enableStub = () => {
+        window.gtag = (...args) => {
+          calls.push(args);
+          messages.push(`conversion ${calls.length}：${JSON.stringify(args)}`);
+          render();
+        };
+        status.textContent = "gtag stub 已啟用；不送 Google";
+      };
+      enableStub();
+      render();
+
+      document.getElementById("stub-on").addEventListener("click", enableStub);
+      document.getElementById("stub-off").addEventListener("click", () => {
+        delete window.gtag;
+        status.textContent = "gtag 已移除；連結仍應可用";
+      });
+      document.getElementById("stub-throw").addEventListener("click", () => {
+        window.gtag = () => {
+          messages.push("stub 拋錯（helper 應捕捉，且不鎖住之後的事件）");
+          render();
+          throw new Error("QA stub failure");
+        };
+        status.textContent = "gtag 設為拋錯；連結仍應可用";
+      });
+      document.getElementById("reinstall").addEventListener("click", () => {
+        const first = installAdsClickTracking(root);
+        const second = installAdsClickTracking(root);
+        status.textContent = `重複掛載完成；同一個 cleanup：${first === second && first === cleanup}`;
+      });
+      document.getElementById("reset").addEventListener("click", () => {
+        cleanup();
+        cleanup = installAdsClickTracking(root);
+        delete window.__vovGoogleAdsConversions;
+        calls = [];
+        messages = [];
+        clicks = 0;
+        prevented = 0;
+        enableStub();
+        render();
+      });
+      document.getElementById("booking").addEventListener("click", () => {
+        const sent = sendBookingPageConversion(window);
+        status.textContent = sent ? "預約頁到達已送入 stub；沒有完成預約事件" : "本次未送出（可能同頁已送過、缺 gtag 或 stub 拋錯）";
+      });
+      root.addEventListener("click", (event) => {
+        const link = event.target.closest("a[href]");
+        if (!link) return;
+        clicks += 1;
+        if (event.defaultPrevented) prevented += 1;
+        messages.push(`click ${clicks}：helper defaultPrevented=${event.defaultPrevented}；${link.textContent.trim()}`);
+        event.preventDefault();
+        render();
+      });
+    </script>
+  </body>
+</html>
