@@ -353,7 +353,7 @@ const Home = () => {
       </section>
 
       {isHomeContentLoading || featuredPortfolio.length > 0 ? (
-        <section className="py-5">
+        <section className="home-featured-portfolio py-5">
           <div className="container">
             <div className="home-section-heading home-section-heading-centered home-reveal">
               <div>
@@ -385,7 +385,7 @@ const Home = () => {
                   : featuredPortfolio.map((item) => (
                       <div className="home-carousel-item" key={item.id}>
                         <Link
-                          to="/portfolio"
+                          to={`/portfolio?category=${encodeURIComponent(item.category)}`}
                           className="home-portfolio-photo-link"
                           aria-label={`查看作品：${item.title || "作品"}`}
                         >
@@ -406,13 +406,16 @@ const Home = () => {
                             <p className="eyebrow text-muted mb-2">
                               {item.category}
                             </p>
-                            <h5 className="card-title">{item.title}</h5>
+                            <h3 className="card-title">{item.title.replace(/｜歡迎預約諮詢$/, "")}</h3>
                             <p className="card-text mb-1">{item.subtitle}</p>
                             {item.stylist ? (
                               <p className="mb-0 text-muted">
                                 設計師：{item.stylist}
                               </p>
                             ) : null}
+                            <span className="home-portfolio-detail">
+                              查看作品 <Icon name="chevron-right" aria-hidden="true" />
+                            </span>
                           </div>
                         </Link>
                       </div>
@@ -448,7 +451,7 @@ const Home = () => {
       ) : null}
 
       {isHomeContentLoading || featuredNews.length > 0 ? (
-        <section className="py-5 bg-soft">
+        <section className="home-featured-news py-5 bg-soft">
           <div className="container">
             <div className="home-section-heading home-section-heading-centered home-reveal">
               <div>
@@ -487,7 +490,7 @@ const Home = () => {
                             <img
                               src={item.image}
                               srcSet={item.imageSrcSet}
-                              sizes="(max-width: 767px) 100vw, 50vw"
+                              sizes="(max-width: 767px) 100vw, 33vw"
                               alt={item.imageAlt}
                               className="home-preview-image"
                               width="900"
@@ -498,8 +501,7 @@ const Home = () => {
                           ) : null}
                           <div className="card-body">
                             <p className="eyebrow text-muted mb-2">{item.date}</p>
-                            <h5 className="card-title">{item.title}</h5>
-                            <p className="card-text">{item.summary}</p>
+                            <h3 className="card-title">{item.title}</h3>
                             <Link to={getNewsPath(item)} className="news-read-more">
                               閱讀更多
                               <Icon
