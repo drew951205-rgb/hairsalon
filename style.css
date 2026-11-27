@@ -2802,6 +2802,7 @@ section.py-5 {
 
   .hero {
     padding: 3rem 0;
+    min-height: calc(var(--hero-viewport-height, 100svh) - 5rem);
   }
 
   .hero h2 {

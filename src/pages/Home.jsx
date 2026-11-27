@@ -10,6 +10,7 @@ import {
 } from "../lib/sanity";
 import { formatNewsDate, getNewsPath } from "../lib/news";
 import Icon from "../components/Icon";
+import { useLayoutEffect } from "react";
 import { displayedStylists } from "../stylists";
 
 const isValidItem = (item) => Boolean(item && typeof item === "object");
@@ -127,6 +128,32 @@ const renderTestimonialCard = (testimonial, index) => (
 );
 
 const Home = () => {
+  const heroRef = useRef(null);
+  useLayoutEffect(() => {
+    const mobile = window.matchMedia("(max-width: 768px)");
+    const orientation = window.matchMedia("(orientation: portrait)");
+    let frame;
+    const freezeHeroHeight = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const hero = heroRef.current;
+        if (mobile.matches) {
+          hero?.style.setProperty("--hero-viewport-height", `${window.innerHeight}px`);
+        } else {
+          hero?.style.removeProperty("--hero-viewport-height");
+        }
+      });
+    };
+    // In-app browser toolbar resizing must not rescale the hero while scrolling.
+    freezeHeroHeight();
+    mobile.addEventListener("change", freezeHeroHeight);
+    orientation.addEventListener("change", freezeHeroHeight);
+    return () => {
+      cancelAnimationFrame(frame);
+      mobile.removeEventListener("change", freezeHeroHeight);
+      orientation.removeEventListener("change", freezeHeroHeight);
+    };
+  }, []);
   const [isHomeContentLoading, setIsHomeContentLoading] = useState(true);
   const [homeContentError, setHomeContentError] = useState("");
   const [featuredNews, setFeaturedNews] = useState([]);
@@ -273,7 +300,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section className="hero position-relative overflow-hidden">
+      <section ref={heroRef} className="hero position-relative overflow-hidden">
         <div className="hero-inner">
           <div className="hero-copy text-center text-white">
             <p className="eyebrow">-Change Your Hair. Change Your -</p>
