@@ -10,6 +10,7 @@ import {
 } from "../lib/sanity";
 import { formatNewsDate, getNewsPath } from "../lib/news";
 import Icon from "../components/Icon";
+import { displayedStylists } from "../stylists";
 
 const isValidItem = (item) => Boolean(item && typeof item === "object");
 
@@ -79,89 +80,29 @@ const mapTestimonialItem = (item) => {
   };
 };
 
-const serviceIcons = [
-  {
-    type: "icon",
-    value: "scissors",
-    alt: "剪髮服務 icon",
-  },
-  {
-    type: "image",
-    value: "/assets/hair-color.png",
-    alt: "染髮服務 icon",
-  },
-  {
-    type: "image",
-    value: "/assets/hair.png",
-    alt: "燙髮服務 icon",
-  },
-  {
-    type: "image",
-    value: "/assets/scalp care.webp",
-    alt: "高壓氧外泌體毛囊再生頭皮SPA服務 icon",
-  },
-  {
-    type: "image",
-    value: "/assets/scalp care.webp",
-    alt: "綜效頭皮SPA含洗服務 icon",
-  },
-];
-
-const renderServiceIcon = (index) => {
-  const icon = serviceIcons[index % services.length];
-
-  if (!icon) {
-    return null;
-  }
-
-  return (
-    <div className="service-motion-icon" aria-hidden={icon.type === "icon"}>
-      {icon.type === "icon" ? (
-        <Icon name={icon.value} />
-      ) : (
-        <img src={icon.value} alt={icon.alt} width="512" height="512" />
-      )}
-    </div>
-  );
-};
-
-const serviceIntroPaths = [
-  "/chiayi-haircut",
-  "/chiayi-hair-color",
-  "/chiayi-perm",
-  "/chiayi-exosome-scalp-spa",
-  "/chiayi-scalp-spa",
-];
 
 const homeSkeletonItems = Array.from({ length: 3 }, (_, index) => index);
 
-const getServiceIntroPath = (index) =>
-  serviceIntroPaths[index % services.length] || "";
+const featuredServices = [
+  { ...services[0], image: "/assets/cut.service.optimized.jpg" },
+  { ...services[1], image: "/assets/color.service.optimized.jpg" },
+  { ...services[2], image: "/assets/perm.service.optimized.jpg" },
+  { ...services[4], title: "頭皮養護", image: "/assets/scalp.service.optimized.jpg" },
+];
 
-const renderServiceCard = (service, index, className = "") => (
-  <article
-    className={`card service-marquee-card border-0 shadow-soft ${className}`}
-    key={`${service.title}-${index}`}
-  >
-    <div className="card-body">
-      <div className="service-motion-topline">
-        <p className="service-motion-number">
-          {String((index % services.length) + 1).padStart(2, "0")}
-        </p>
-        {renderServiceIcon(index)}
-      </div>
-      <h5 className="card-title service-card-title">{service.title}</h5>
-      <p className="card-text">{service.description}</p>
-      <p className="mb-1 text-muted">{service.price}</p>
-      {getServiceIntroPath(index) ? (
-        <Link
-          to={getServiceIntroPath(index)}
-          className="news-read-more service-more-link"
-        >
-          查看服務介紹
-          <Icon name="arrow-right-to-bracket" aria-hidden="true" />
+const ServiceCard = ({ service }) => (
+  <article className="hot-service-card home-carousel-item">
+    <img className="hot-service-photo" src={service.image} alt={`${service.title}服務過程`}
+      width="1280" height="853" loading="lazy" decoding="async" />
+    <div className="hot-service-copy">
+      <h3>{service.title}</h3>
+      <p>{service.description}</p>
+      <div className="hot-service-details">
+        <strong>{service.price}</strong>
+        <Link to={service.introPath} aria-label={`查看${service.title}服務介紹`}>
+          查看服務介紹 <Icon name="chevron-right" aria-hidden="true" />
         </Link>
-      ) : null}
+      </div>
     </div>
   </article>
 );
@@ -192,6 +133,32 @@ const Home = () => {
   const [featuredPortfolio, setFeaturedPortfolio] = useState([]);
   const [activeNewsIndex, setActiveNewsIndex] = useState(0);
   const [activePortfolioIndex, setActivePortfolioIndex] = useState(0);
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [cardsPerPage, setCardsPerPage] = useState(() =>
+    window.matchMedia("(min-width: 768px)").matches ? 3 : 1,
+  );
+  const serviceCarouselRef = useRef(null);
+  const stylistCarouselRef = useRef(null);
+  const [activeStylistIndex, setActiveStylistIndex] = useState(0);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const updateLayout = () => {
+      setCardsPerPage(desktop.matches ? 3 : 1);
+      serviceCarouselRef.current?.scrollTo({ left: 0 });
+      stylistCarouselRef.current?.scrollTo({ left: 0 });
+      setActiveServiceIndex(0);
+      setActiveStylistIndex(0);
+    };
+    desktop.addEventListener("change", updateLayout);
+    return () => desktop.removeEventListener("change", updateLayout);
+  }, []);
+  const moveService = (direction) => {
+    const carousel = serviceCarouselRef.current;
+    carousel.scrollBy({
+      left: direction * carousel.clientWidth,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  };
   const newsCarouselRef = useRef(null);
   const portfolioCarouselRef = useRef(null);
   const [customerTestimonials, setCustomerTestimonials] = useState(
@@ -321,7 +288,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-5">
+      <section className="home-services py-5" aria-labelledby="home-services-title">
         <div className="container">
           {homeContentError ? (
             <div className="alert alert-warning home-reveal" role="alert">
@@ -330,25 +297,31 @@ const Home = () => {
           ) : null}
           <div className="d-flex flex-column align-items-center text-center gap-3 mb-4 home-reveal">
             <div>
-              <h2 className="display-6 fw-bold section-line-title">熱門服務</h2>
+              <h2 id="home-services-title" className="display-6 fw-bold section-line-title">熱門服務</h2>
               <p className="section-subtitle-en mb-0">Services</p>
             </div>
           </div>
-          <div className="row gy-4 service-desktop-grid">
-            {services.map((service, index) => (
-              <div key={service.title} className="col-md-6 col-xl-3">
-                {renderServiceCard(service, index, "h-100 home-reveal")}
-              </div>
-            ))}
-          </div>
-          <div className="service-marquee home-reveal" aria-label="?梢???皛??”">
-            <div className="service-marquee-track">
-              {services.map((service, index) =>
-                renderServiceCard(service, index),
-              )}
+          <div className="hot-service-carousel">
+            <div className="hot-service-track" ref={serviceCarouselRef}
+              role="group" aria-label="熱門服務滑動列表"
+              onScroll={() => syncCarouselIndex(serviceCarouselRef, setActiveServiceIndex)}>
+              {featuredServices.map((service) => (
+                <ServiceCard key={service.introPath} service={service} />
+              ))}
+            </div>
+            <div className="hot-service-controls">
+              <button type="button" aria-label="上一項服務" disabled={activeServiceIndex === 0}
+                onClick={() => moveService(-1)}>
+                <Icon name="chevron-left" aria-hidden="true" />
+              </button>
+              <span aria-live="polite">{Math.ceil(activeServiceIndex / cardsPerPage) + 1} / {Math.ceil(featuredServices.length / cardsPerPage)}</span>
+              <button type="button" aria-label="下一項服務"
+                disabled={activeServiceIndex >= featuredServices.length - cardsPerPage}
+                onClick={() => moveService(1)}>
+                <Icon name="chevron-right" aria-hidden="true" />
+              </button>
             </div>
           </div>
-          <p className="service-motion-hint">左右滑動，找到最適合你的服務</p>
         </div>
       </section>
 
@@ -536,6 +509,46 @@ const Home = () => {
           </div>
         </section>
       ) : null}
+
+      <section className="home-services home-stylists py-5" aria-labelledby="home-stylists-title">
+        <div className="container">
+          <div className="text-center mb-4">
+            <h2 id="home-stylists-title" className="display-6 fw-bold">尋找你的設計師</h2>
+          </div>
+          <div className="hot-service-carousel">
+            <div className="hot-service-track" ref={stylistCarouselRef}
+              role="group" aria-label="設計師滑動列表"
+              onScroll={() => syncCarouselIndex(stylistCarouselRef, setActiveStylistIndex)}>
+              {displayedStylists.map((stylist) => (
+                <article className="hot-service-card home-carousel-item" key={stylist.name}>
+                  <img className="hot-service-photo home-stylist-photo" src={stylist.image}
+                    alt={stylist.imageAlt} width="700" height="900" loading="lazy" decoding="async" />
+                  <div className="hot-service-copy">
+                    <h3>{stylist.name}</h3>
+                    <div className="hot-service-details home-stylist-details">
+                      <Link to={`/stylists#${encodeURIComponent(`stylist-${stylist.name}`)}`}
+                        aria-label={`查看 ${stylist.name} 設計師介紹`}>
+                        查看設計師介紹 <Icon name="chevron-right" aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="hot-service-controls">
+              <button type="button" aria-label="上一位設計師" disabled={activeStylistIndex === 0}
+                onClick={() => stylistCarouselRef.current.scrollBy({ left: -stylistCarouselRef.current.clientWidth, behavior: "smooth" })}>
+                <Icon name="chevron-left" aria-hidden="true" />
+              </button>
+              <span aria-live="polite">{Math.ceil(activeStylistIndex / cardsPerPage) + 1} / {Math.ceil(displayedStylists.length / cardsPerPage)}</span>
+              <button type="button" aria-label="下一位設計師" disabled={activeStylistIndex >= displayedStylists.length - cardsPerPage}
+                onClick={() => stylistCarouselRef.current.scrollBy({ left: stylistCarouselRef.current.clientWidth, behavior: "smooth" })}>
+                <Icon name="chevron-right" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="py-5 bg-soft">
         <div className="container">

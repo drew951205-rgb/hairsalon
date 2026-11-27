@@ -10,6 +10,7 @@ export const navItems = [
 export const services = [
   {
     title: "剪髮",
+    introPath: "/chiayi-haircut",
     description: "專業剪髮設計，適合各種髮型與臉型。",
     price: "NT$700 起",
     duration: "約 30-60 分鐘",
@@ -17,6 +18,7 @@ export const services = [
   },
   {
     title: "染髮",
+    introPath: "/chiayi-hair-color",
     description: "日系自然染色技術，使用高品質染料，持久亮麗不傷髮。",
     price: "NT$2000 起",
     duration: "約 120-180 分鐘",
@@ -24,6 +26,7 @@ export const services = [
   },
   {
     title: "燙髮",
+    introPath: "/chiayi-perm",
     description: "韓系燙髮技術，創造自然捲度，適合各種髮質。",
     price: "NT$3000 起",
     duration: "約 180-240 分鐘",
@@ -31,6 +34,7 @@ export const services = [
   },
   {
     title: "高壓氧外泌體毛囊再生頭皮SPA",
+    introPath: "/chiayi-exosome-scalp-spa",
     description: "結合高壓氧導入與外泌體養護，針對毛囊與頭皮狀態進行深層修護。",
     price: "NT$6000 起",
     duration: "約 60分鐘",
@@ -38,6 +42,7 @@ export const services = [
   },
   {
     title: "絲馭光頭皮SPA護理含洗",
+    introPath: "/chiayi-scalp-spa",
     description: "專業綜效頭皮SPA服務，包含洗髮，擁有舒壓放鬆的美好體驗。",
     price: "NT$1200 起",
     duration: "約  60 分鐘",
